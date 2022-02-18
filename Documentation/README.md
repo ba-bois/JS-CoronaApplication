@@ -84,9 +84,12 @@ Not in scope:
 
 - git
 - Github
+- node 
+- npm
 - Frameworks
-  - NextJS
+  - react / NextJS
   - Express
+  - node-json-db
   - nodeMailer
   - PDF-creator-Node
 
