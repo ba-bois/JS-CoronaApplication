@@ -1,12 +1,13 @@
 # JS-CoronaApplication
 
 This some serious gourmet code.
+Das seriöser Gourmetcode.
 
-**General Description**
+**Allgemeine Beschreibung**
 
 Im Rahmen unseres Projektes möchten wir eine Onlineanmeldung für ein fiktives Corona-testzentrum schaffen. Dabei werden jedoch aufgrund von Ressourceneinschränkungen nicht alle möglichen, sondern eher prioriersierte Anwendungsfälle berücksichtigt.
 
-**We're doing these for sure:**
+**Das werden wir mit Sicherheit machen:**
 
 1. Als Anwender möchte ich mich zum Corona Test anmelden.
    1. **UseCase-Nummer**: JS_BABOIS+A_1
@@ -68,19 +69,19 @@ Im Rahmen unseres Projektes möchten wir eine Onlineanmeldung für ein fiktives 
       1. Verwaltungspersonal benutzt filter
       2. Die Filter werden aktiviert und die sichtbare Auswahl an Elementen wird reduziert
 
-**These are somme possible additions (in order):**
+**Das sind Erweiterungsmöglichkeiten (in Priorisierungsreihenfolge):**
 
 5. Als Verwaltung möchte ich Testergebnisse eintragen können.
 6. Als Anwender möchte ich, dass mein Testergebnis zu einem Dokument verarbeitet wird.
 7. Als Anwender möchte ich mein verarbeitetes Testergebnis per Email zugeschickt bekommen.
 8. Als Anwender möchte ich eine Anmeldebestätigung per Email zugeschickt bekommen, damit ich weiß ob mein Termin ordnungsgemäß eingetragen wurde.
 
-Not in scope:
+Nicht priorisiert:
 
 9. Als Verwaltung will ich Statistiken darüber haben, wie viele Coronafälle bereits mit welchem Kunden und mit welchem Ergebnis stattfanden.
 10. Anlegen von Datensätzen im Frontend für Verwaltung
 
-**Software we're using:**
+**Software, die wir verwenden:**
 
 - git
 - Github
@@ -93,11 +94,11 @@ Not in scope:
   - nodeMailer
   - PDF-creator-Node
 
-**Farb-scheme**
+**Farbschema**
 
 https://coolors.co/e8e9f3-f05365-fabc2a-253d5b
 
-**Font**
+**Schriftart**
 
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -108,6 +109,6 @@ https://coolors.co/e8e9f3-f05365-fabc2a-253d5b
 />
 ```
 
-**Our design was created in:**
+**Unser Seign wurde erstellt in:**
 
 Figma
