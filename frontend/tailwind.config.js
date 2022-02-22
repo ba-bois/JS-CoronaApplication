@@ -9,7 +9,8 @@ module.exports = {
       "ghostwhite":"#E8E9F3",
       "fieryrose":"#F05365",
       "mango":"#FABC2A",
-      "prussianblue":"#253D5B"
+      "prussianblue":"#253D5B",
+      "white":"#ffffff"
     },
   },
   plugins: [],
