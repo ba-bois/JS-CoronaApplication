@@ -112,3 +112,8 @@ https://coolors.co/e8e9f3-f05365-fabc2a-253d5b
 **Unser Seign wurde erstellt in:**
 
 Figma
+
+
+**Bekannte Bugs**
+
+Wir wissen, dass es einen Skalierungsfehler bei Firefox gibt, durch den Elemente etwas verzerrt dargestellt dargestellt werden können. Explizit bedeutet das für uns, dass die Inputfelderumrandungen nicht korrekt dargestellt werden, wenn man Firefox 97.0.1 in einer Skalierung über 100% benutzt. In Chromium tritt dieser Bug nicht auf, andere Browser wurden nicht getestet.
