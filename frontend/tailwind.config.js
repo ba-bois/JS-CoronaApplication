@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     extend: {},
     colors:{
+      "transparent": 'transparent',
       "ghostwhite":"#E8E9F3",
       "fieryrose":"#F05365",
       "mango":"#FABC2A",
