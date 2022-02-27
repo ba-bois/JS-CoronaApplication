@@ -12,7 +12,7 @@ import {
   Gift,
   ListNumbers,
 } from "tabler-icons-react";
-export default function UserLogin() {
+export default function Anmeldung() {
   const [errMsgObject, setErrMsgObject] = useState({});
   const [data, setData] = useState({
     surname: null,
@@ -222,9 +222,14 @@ export default function UserLogin() {
 
         {/* Button After the Bubble */}
         <button
-          className="pt-5"
+          className="pt-5 text-mango"
           onClick={() => {
-            console.log(data);
+            console.log("Data :", Object.values(data));
+            console.log("Data überprüft: ", Object.values(data).includes(null));
+            console.log(
+              "Fehler überprüft:",
+              Object.values(errMsgObject).filter((el) => !!el).length > 0
+            );
           }}
         >
           Bestätigen!
