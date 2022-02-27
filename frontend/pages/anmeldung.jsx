@@ -61,7 +61,7 @@ export default function UserLogin() {
                 if (!e.target.value.match(/^([^0-9]+)$/)) {
                   setErrMsgObject({
                     ...errMsgObject,
-                    surname: "Der Vorname entpricht nicht dem Muster",
+                    surname: "Ungültiger Vorname.",
                   });
                 } else {
                   setErrMsgObject({ ...errMsgObject, surname: null });
@@ -77,7 +77,7 @@ export default function UserLogin() {
                 if (!e.target.value.match(/^([^0-9]+)$/)) {
                   setErrMsgObject({
                     ...errMsgObject,
-                    lastName: "Der Nachname entpricht nicht dem Muster",
+                    lastName: "Ungültiger Nachname.",
                   });
                 } else {
                   setErrMsgObject({ ...errMsgObject, lastName: null });
@@ -87,40 +87,44 @@ export default function UserLogin() {
               errorMsg={errMsgObject.lastName}
             />
           </div>
-          <Inputfield
-            className="flex-auto"
-            placeholder="Handynummer"
-            icon={<DeviceMobile size={32} />}
-            onBlur={(e) => {
-              if (!e.target.value.match(/^(^\+49)|(^0[1-9][0-9]+)$/)) {
-                setErrMsgObject({
-                  ...errMsgObject,
-                  phoneNumber: "Die Telefonnummer entpricht nicht dem Muster",
-                });
-              } else {
-                setErrMsgObject({ ...errMsgObject, phoneNumber: null });
-                setData({...data, phoneNumber: e.target.value})
-              }
-            }}
-            errorMsg={errMsgObject.phoneNumber}
-          />
-          <Inputfield
-            placeholder="E-Mail-adresse"
-            className="flex-auto "
-            icon={<Mail size={32} />}
-            onBlur={(e) => {
-              if (!e.target.value.match(/(.+)@(.+){2,}\.(.+){2,}/)) {
-                setErrMsgObject({
-                  ...errMsgObject,
-                  mail: "Die Emailadresse entpricht nicht dem Muster",
-                });
-              } else {
-                setErrMsgObject({ ...errMsgObject, mail: null });
-                setData({...data, mail: e.target.value})
-              }
-            }}
-            errorMsg={errMsgObject.mail}
-          />
+          <div className="flex flex-auto">
+            <Inputfield
+              className="flex-auto"
+              placeholder="Handynummer"
+              icon={<DeviceMobile size={32} />}
+              onBlur={(e) => {
+                if (!e.target.value.match(/^(^\+49)|(^0[1-9][0-9]+)$/)) {
+                  setErrMsgObject({
+                    ...errMsgObject,
+                    phoneNumber: "Ungültige Telefonnummer.",
+                  });
+                } else {
+                  setErrMsgObject({ ...errMsgObject, phoneNumber: null });
+                  setData({ ...data, phoneNumber: e.target.value });
+                }
+              }}
+              errorMsg={errMsgObject.phoneNumber}
+            />
+          </div>
+          <div className="flex flex-auto">
+            <Inputfield
+              placeholder="E-Mail-adresse"
+              className="flex-auto "
+              icon={<Mail size={32} />}
+              onBlur={(e) => {
+                if (!e.target.value.match(/(.+)@(.+){1,}\.(.+){2,}/)) {
+                  setErrMsgObject({
+                    ...errMsgObject,
+                    mail: "Ungültige E-Mail-adresse.",
+                  });
+                } else {
+                  setErrMsgObject({ ...errMsgObject, mail: null });
+                  setData({ ...data, mail: e.target.value });
+                }
+              }}
+              errorMsg={errMsgObject.mail}
+            />
+          </div>
           <div className="flex flex-auto gap-8">
             <Inputfield
               placeholder="Postleitzahl"
@@ -133,11 +137,11 @@ export default function UserLogin() {
                 ) {
                   setErrMsgObject({
                     ...errMsgObject,
-                    postCode: "Die Postleitzahl entpricht nicht dem Muster",
+                    postCode: "Ungültige Postleitzahl.",
                   });
                 } else {
                   setErrMsgObject({ ...errMsgObject, postCode: null });
-                  setData({...data, postCode: e.target.value})
+                  setData({ ...data, postCode: e.target.value });
                 }
               }}
               errorMsg={errMsgObject.postCode}
@@ -149,11 +153,11 @@ export default function UserLogin() {
                 if (!e.target.value.match(/^([^0-9]+)$/)) {
                   setErrMsgObject({
                     ...errMsgObject,
-                    city: "Die Stadt entpricht nicht dem Muster",
+                    city: "Ungültige Stadt.",
                   });
                 } else {
                   setErrMsgObject({ ...errMsgObject, city: null });
-                  setData({...data, city: e.target.value})
+                  setData({ ...data, city: e.target.value });
                 }
               }}
               errorMsg={errMsgObject.city}
@@ -167,11 +171,11 @@ export default function UserLogin() {
                 if (!e.target.value.match(/^([^0-9]+)$/)) {
                   setErrMsgObject({
                     ...errMsgObject,
-                    street: "Die Straße entpricht nicht dem Muster",
+                    street: "Ungültige Straße.",
                   });
                 } else {
                   setErrMsgObject({ ...errMsgObject, street: null });
-                  setData({...data, street: e.target.value})
+                  setData({ ...data, street: e.target.value });
                 }
               }}
               errorMsg={errMsgObject.street}
@@ -180,14 +184,14 @@ export default function UserLogin() {
               placeholder="Hausnummer"
               icon={<Home2 size={32} />}
               onBlur={(e) => {
-                if (!e.target.value.match(/^([0-9]*)$/)) {
+                if (!e.target.value.match(/^([0-9]\d*)$/)) {
                   setErrMsgObject({
                     ...errMsgObject,
-                    houseNumber: "Die Straße entpricht nicht dem Muster",
+                    houseNumber: "Ungültige Hausnummer.",
                   });
                 } else {
                   setErrMsgObject({ ...errMsgObject, houseNumber: null });
-                  setData({...data, houseNumber: e.target.value})
+                  setData({ ...data, houseNumber: e.target.value });
                 }
               }}
               errorMsg={errMsgObject.houseNumber}
@@ -202,11 +206,11 @@ export default function UserLogin() {
               if (!e.target.validity.valid || !e.target.value) {
                 setErrMsgObject({
                   ...errMsgObject,
-                  birthdate: "Die Straße entpricht nicht dem Muster",
+                  birthdate: "Ungültiges Geburtsdatum.",
                 });
               } else {
                 setErrMsgObject({ ...errMsgObject, birthdate: null });
-                setData({...data, birthdate: e.target.valueAsDate})
+                setData({ ...data, birthdate: e.target.valueAsDate });
               }
             }}
             errorMsg={errMsgObject.birthdate}
@@ -217,10 +221,15 @@ export default function UserLogin() {
         <div className="w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-t-[40px] border-t-white bg-ghostwhite z-10" />
 
         {/* Button After the Bubble */}
-        <button className="pt-5" onClick={() => {console.log(data)}}>Bestätigen!</button>
+        <button
+          className="pt-5"
+          onClick={() => {
+            console.log(data);
+          }}
+        >
+          Bestätigen!
+        </button>
       </main>
-
-      <footer></footer>
     </div>
   );
 }
