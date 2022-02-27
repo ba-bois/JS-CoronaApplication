@@ -1,38 +1,38 @@
-import { useState, useEffect } from "react";
+import React from "react";
 
 const UserLogin = (props) => {
-  const [hasError, setHasError] = useState(props.hasError);
-
-  useEffect(() => {
-    setHasError(props.hasError);
-  }, [props.hasError]);
-
   return (
     <div
       id={props.id}
       className={`rounded-full w-full h-auto min-h-5 bg-ghostwhite flex align-middle ${
-        !hasError
+        !props.errorMsg
           ? "focus-within:ring-mango focus-within:ring-2"
           : "ring-fieryrose ring-4"
-      }  overflow-hidden ${props.className}`}
+      }  overflow-hidden  ${props.className}`}
     >
       <input
         placeholder={props.placeholder}
-        className={`bg-ghostwhite w-full ml-4 outline-none overflow-hidden text-2xl ${
-          hasError && "text-fieryrose placeholder:text-fieryrose"
+        className={`bg-ghostwhite w-full ml-4 outline-none overflow-hidden text-2xl z-10 invalid:text-fieryrose ${
+          !!props.errorMsg && "text-fieryrose placeholder:text-fieryrose"
         }`}
-        onBlur={() => {
-          console.log("Hallo");
+        onBlur={(e) => {
+          !!props.onBlur && props.onBlur(e);
         }}
-        type="text"
+        type={props.type || "text"}
+        pattern={props.pattern}
       />
+      {/* //TODO: Error Message einbauen (Muss absolut sein, damit sich nix verschiebt, aber auch unter dem Feld) */}
+      {/* {props.errorMsg && <span>{props.errorMsg}</span>} */}
       <div
         className={`w-1/5 flex justify-end ${
-          !hasError ? "fill-prussianblue" : "fill-fieryrose"
+          !props.errorMsg ? "fill-prussianblue" : "fill-fieryrose"
         }`}
       >
-        <div className="flex flex-col justify-center pr-5 ">
-          {props.icon}
+        <div className="flex flex-col justify-center pr-5">
+          {
+            React.cloneElement(props.icon,
+            { color: !props.errorMsg ? "#253D5B" : "#F05365" })
+          }
         </div>
       </div>
     </div>
