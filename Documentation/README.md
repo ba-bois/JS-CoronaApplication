@@ -80,6 +80,7 @@ Nicht priorisiert:
 
 9. Als Verwaltung will ich Statistiken darüber haben, wie viele Coronafälle bereits mit welchem Kunden und mit welchem Ergebnis stattfanden.
 10. Anlegen von Datensätzen im Frontend für Verwaltung
+11. Eine API für synchronisierte PLZ / Stadt einsetzung, sowie Straßenvorschläge
 
 **Software, die wir verwenden:**
 
