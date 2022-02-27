@@ -1,9 +1,9 @@
 import Head from "next/head";
 import Inputfield from "../Components/Inputfield";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
 import Title from "../Components/Title";
-import Button from "../Components/Title";
+import Button from "../Components/Button";
 
 export default function Anmeldung() {
   const [errMsgObject, setErrMsgObject] = useState({});
@@ -18,6 +18,11 @@ export default function Anmeldung() {
     houseNumber: null,
     birthdate: null,
   });
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    setIsFormValid(!Object.values(data).includes(null) && !Object.values(errMsgObject).filter((el) => !!el).length > 0);
+  }, [errMsgObject, data]);
 
   return (
     <div>
@@ -28,7 +33,7 @@ export default function Anmeldung() {
       </Head>
       <main className="min-h-screen bg-ghostwhite flex flex-col w-full items-center selection:bg-mango text-prussianblue">
         {/* Main Bubble */}
-        <div className="h-[80vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-10 p-10 overflow-auto">
+        <div className="h-[75vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-10 p-10 overflow-auto">
           <Title>Anmeldung</Title>
           <div className="flex flex-auto gap-8 flex-col md:flex-row">
             <Inputfield
@@ -195,14 +200,15 @@ export default function Anmeldung() {
 
         {/* Button After the Bubble */}
         <Button
-          className="pt-5 text-mango"
+          className="mt-4 w-[20%] text-4xl border-mango border-4 min-w-fit"
           onClick={() => {
-            console.log("Data :", Object.values(data));
-            console.log("Data überprüft: ", Object.values(data).includes(null));
-            console.log("Fehler überprüft:", Object.values(errMsgObject).filter((el) => !!el).length > 0);
+            if (isFormValid) {
+              //TODO: Daten werden verschickt
+            }
           }}
+          disabled={!isFormValid}
         >
-          Bestätigen!
+          Buchen!
         </Button>
       </main>
     </div>
