@@ -12,6 +12,8 @@ const UserLogin = (props) => {
         }  overflow-hidden  ${props.className}`}
       >
         <input
+          // autoComplete = "off" ist notwendig, da (mögl. unter Anderem) bei Firefox 97.0.1 die Felder durch Autovervollständigung ausgefüllt werden, aber im React state immernoch initial bei null sind 
+          autoComplete="off"
           placeholder={props.placeholder}
           className={`bg-ghostwhite w-full ml-4 outline-none overflow-hidden text-2xl z-10 invalid:text-fieryrose ${
             !!props.errorMsg && "text-fieryrose placeholder:text-fieryrose"
