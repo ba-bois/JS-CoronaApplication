@@ -53,7 +53,7 @@ export default function UserLogin() {
         {/* Main Bubble */}
         <div className="h-[80vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-12 p-10 overflow-auto">
           Title
-          <div className="flex flex-auto gap-8">
+          <div className="flex flex-auto gap-8 flex-col md:flex-row">
             <Inputfield
               placeholder="Vorname"
               icon={<User size={32} />}
@@ -125,7 +125,7 @@ export default function UserLogin() {
               errorMsg={errMsgObject.mail}
             />
           </div>
-          <div className="flex flex-auto gap-8">
+          <div className="flex flex-auto gap-8 flex-col md:flex-row">
             <Inputfield
               placeholder="Postleitzahl"
               icon={<ListNumbers size={32} />}
@@ -163,7 +163,7 @@ export default function UserLogin() {
               errorMsg={errMsgObject.city}
             />
           </div>
-          <div className="flex flex-auto gap-8">
+          <div className="flex flex-auto gap-8 flex-col md:flex-row">
             <Inputfield
               placeholder="Straße"
               icon={<Home size={32} />}
