@@ -1,17 +1,10 @@
 import Head from "next/head";
 import Inputfield from "../Components/Inputfield";
 import { useState } from "react";
+import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
+import Title from "../Components/Title";
+import Button from "../Components/Title";
 
-import {
-  User,
-  DeviceMobile,
-  Mail,
-  Home,
-  Home2,
-  BuildingSkyscraper,
-  Gift,
-  ListNumbers,
-} from "tabler-icons-react";
 export default function Anmeldung() {
   const [errMsgObject, setErrMsgObject] = useState({});
   const [data, setData] = useState({
@@ -26,33 +19,17 @@ export default function Anmeldung() {
     birthdate: null,
   });
 
-  // Schnittstelle Daten:
-  // {
-  //   surname: string,
-  //   lastName: string,
-  //   phoneNumber: string,
-  //   mail: string,
-  //   postCode: string,
-  //   city: string,
-  //   street: string,
-  //   houseNumber: string,
-  //   birthdate: date
-  // }
-
   return (
     <div>
       <Head>
-        <title>Anmeldung Termin</title>
-        <meta
-          name="description"
-          content="Your Appointment for a corona test made here"
-        />
+        <title>Anmeldung</title>
+        <meta name="description" content="Your Appointment for a corona test made here" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-h-screen bg-ghostwhite flex flex-col w-full items-center selection:bg-mango text-prussianblue">
         {/* Main Bubble */}
-        <div className="h-[80vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-12 p-10 overflow-auto">
-          Title
+        <div className="h-[80vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-10 p-10 overflow-auto">
+          <Title>Anmeldung</Title>
           <div className="flex flex-auto gap-8 flex-col md:flex-row">
             <Inputfield
               placeholder="Vorname"
@@ -130,11 +107,7 @@ export default function Anmeldung() {
               placeholder="Postleitzahl"
               icon={<ListNumbers size={32} />}
               onBlur={(e) => {
-                if (
-                  !e.target.value.match(
-                    /^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/
-                  )
-                ) {
+                if (!e.target.value.match(/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/)) {
                   setErrMsgObject({
                     ...errMsgObject,
                     postCode: "Ungültige Postleitzahl.",
@@ -221,19 +194,16 @@ export default function Anmeldung() {
         <div className="w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-t-[40px] border-t-white bg-ghostwhite z-10" />
 
         {/* Button After the Bubble */}
-        <button
+        <Button
           className="pt-5 text-mango"
           onClick={() => {
             console.log("Data :", Object.values(data));
             console.log("Data überprüft: ", Object.values(data).includes(null));
-            console.log(
-              "Fehler überprüft:",
-              Object.values(errMsgObject).filter((el) => !!el).length > 0
-            );
+            console.log("Fehler überprüft:", Object.values(errMsgObject).filter((el) => !!el).length > 0);
           }}
         >
           Bestätigen!
-        </button>
+        </Button>
       </main>
     </div>
   );
