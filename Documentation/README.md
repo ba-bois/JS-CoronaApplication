@@ -10,64 +10,75 @@ Im Rahmen unseres Projektes möchten wir eine Onlineanmeldung für ein fiktives 
 **Das werden wir mit Sicherheit machen:**
 
 1. Als Anwender möchte ich mich zum Corona Test anmelden.
-   1. **UseCase-Nummer**: JS_BABOIS+A_1
-   2. **Beschreibung**:
-      - Ausgangssituation: Der Anwender ruft das Frontend auf.
-      - Ziel: Für den Anwender soll eine Website geschaffen werden,
-        die es ermöglicht alle notwendigen Daten (TODO: definieren) einzutragen und an die Verwaltung, bzw. ein entsprechendes Backend zu schicken.
-      - Scope: Die so geschafften Termine werden nicht bestimmten Uhrzeiten zugewiesen, sondern man trägt sich für einen Tag ein, an dem man dann kommen muss. Der Tag darf beliebig viele Einträge haben.
-   3. **Stakeholder**: Testzentrumsbetreiber, Verwaltung
-   4. **Beteiligte**: Testpersonen, Backend, Frontend
-   5. **Ablauf**:
-      1. User besucht die Website -> sieht Startseite
-      2. User ruft Formular auf
-      3. User gibt persönliche Daten ein
-      4. User sendet Daten ab
+    1. **UseCase-Nummer**: JS_BABOIS+A_1
+    2. **Beschreibung**:
+        - Ausgangssituation: Der Anwender ruft das Frontend auf.
+        - Ziel: Für den Anwender soll eine Website geschaffen werden,
+          die es ermöglicht alle notwendigen Daten (TODO: definieren) einzutragen und an die Verwaltung, bzw. ein entsprechendes Backend zu schicken.
+        - Scope: Die so geschafften Termine werden nicht bestimmten Uhrzeiten zugewiesen, sondern man trägt sich für einen Tag ein, an dem man dann kommen muss. Der Tag darf beliebig viele Einträge haben.
+    3. **Stakeholder**: Testzentrumsbetreiber, Verwaltung
+    4. **Beteiligte**: Testpersonen, Backend, Frontend
+    5. **Ablauf**:
+        1. User besucht die Website -> sieht Startseite
+        2. User ruft Formular auf
+        3. User gibt persönliche Daten ein
+        4. User sendet Daten ab
 2. Als Anwender möchte ich eine übersichtliche Startseite mit Informationen zum Testcenter und testen haben
-   1. **UseCase-Nummer**: JS_BABOIS+A_2
-   2. **Beschreibung**:
-      - Ausgangssituation: Der Anwender ruft das Frontend auf.
-      - Ziel: Der User wird über gegebene Besonderheiten des Testzentums informiert und kann gegebenenfalls die weiteren Unterseiten anwählen.
-      - Scope: Es wird keine live-neuigkeiten geben.
-   3. **Stakeholder**: Testzentrumsbetreiber, Verwaltung
-   4. **Beteiligte**: Testpersonen, Frontend, Backend
-   5. **Ablauf**:
-      1. User besucht Website
-      2. User bekommt Informationen angezeigt
+    1. **UseCase-Nummer**: JS_BABOIS+A_2
+    2. **Beschreibung**:
+        - Ausgangssituation: Der Anwender ruft das Frontend auf.
+        - Ziel: Der User wird über gegebene Besonderheiten des Testzentums informiert und kann gegebenenfalls die weiteren Unterseiten anwählen.
+        - Scope: Es wird keine live-neuigkeiten geben.
+    3. **Stakeholder**: Testzentrumsbetreiber, Verwaltung
+    4. **Beteiligte**: Testpersonen, Frontend, Backend
+    5. **Ablauf**:
+        1. User besucht Website
+        2. User bekommt Informationen angezeigt
 3. Als Verwaltung will ich eine Anmeldemaske für die Verwaltungswebsite haben.
-   1. **UseCase-Nummer**: JS_BABOIS+A_3
-   2. **Beschreibung**:
-      - Ausgangssituation:Verwaltung besucht Website
-      - Ziel: Verhindern, dass unberechtigte Personen auf die sensiblen Daten zugreifen können.
-      - Scope: keine Multifaktorauthentufizierung, nur Benutzername & Passwort 
-   3. **Stakeholder**: Testzentrzumsverwalter, Testpersonen
-   4. **Beteiligte**: Frontend, Backend, Verwaltungspersonal
-   5. **Ablauf**:
-      1. User ruft Anmeldewebsite auf
-      2. User gibt Anmeldeinformationen an
-      3. User wird zu Website weitergeleitet
+    1. **UseCase-Nummer**: JS_BABOIS+A_3
+    2. **Beschreibung**:
+        - Ausgangssituation:Verwaltung besucht Website
+        - Ziel: Verhindern, dass unberechtigte Personen auf die sensiblen Daten zugreifen können.
+        - Scope: keine Multifaktorauthentufizierung, nur Benutzername & Passwort
+    3. **Stakeholder**: Testzentrzumsverwalter, Testpersonen
+    4. **Beteiligte**: Frontend, Backend, Verwaltungspersonal
+    5. **Ablauf**:
+        1. User ruft Anmeldewebsite auf
+        2. User gibt Anmeldeinformationen an
+        3. User wird zu Website weitergeleitet
 4. Als Verwaltung möchte ich eine Übersicht über alle Anmeldungen sehen können.
-   1. **UseCase-Nummer**: JS_BABOIS+A_4
-   2. **Beschreibung**:
-      - Ausgangssituation: Das Verwaltungspersonal möchte die Daten für den heutigen Tag sehen.
-      - Ziel: Eine verbesserte Routine für das Personal durch übersichtliche Informationen, Durchsuchen der Datensätze um Anmeldungen zu finden
-      - Scope: Kein Löschen von Datensätzen, kein Anlegen von Datensätzen, kein generieren von QR-Codes. Keine Anwesenheitseintragung
-   3. **Stakeholder**: Testzentrumsbetreiber, Verwaltung
-   4. **Beteiligte**: Backend, Testpersonen, Frontend
-   5. **Ablauf**:
-      1. Verwaltungspersonal besucht Website
-      2. Alle Anmeldungen und mögliche Filter werden angezeigt
+    1. **UseCase-Nummer**: JS_BABOIS+A_4
+    2. **Beschreibung**:
+        - Ausgangssituation: Das Verwaltungspersonal möchte die Daten für den heutigen Tag sehen.
+        - Ziel: Eine verbesserte Routine für das Personal durch übersichtliche Informationen, Durchsuchen der Datensätze um Anmeldungen zu finden
+        - Scope: Kein Löschen von Datensätzen, kein Anlegen von Datensätzen, kein generieren von QR-Codes. Keine Anwesenheitseintragung
+    3. **Stakeholder**: Testzentrumsbetreiber, Verwaltung
+    4. **Beteiligte**: Backend, Testpersonen, Frontend
+    5. **Ablauf**:
+        1. Verwaltungspersonal besucht Website
+        2. Alle Anmeldungen und mögliche Filter werden angezeigt
 5. Als Verwaltung möchte ich nach einer Anmeldung suchen können.
-  1. **UseCase-Nummer**: JS_BABOIS+A_5
-   2. **Beschreibung**:
-      - Ausgangssituation: User befindet sich auf Website und möchte nach Anmeldung suchen
-      - Ziel: Zeitersparnisse durch automatisierte Suchfunktion 
-      - Scope: Man kann nach jeglichen Informationen die der Kunde eingegeben hat filtern (TODO, wie oben: definieren)
-   3. **Stakeholder**: Testzentrumsbetreiber, Verwaltung
-   4. **Beteiligte**: Testpersonen, Frontend
-   5. **Ablauf**:
-      1. Verwaltungspersonal benutzt filter
-      2. Die Filter werden aktiviert und die sichtbare Auswahl an Elementen wird reduziert
+    1. **UseCase-Nummer**: JS_BABOIS+A_5
+    2. **Beschreibung**:
+        - Ausgangssituation: User befindet sich auf Website und möchte nach Anmeldung suchen
+        - Ziel: Zeitersparnisse durch automatisierte Suchfunktion
+        - Scope: Man kann nach jeglichen Informationen die der Kunde eingegeben hat filtern (TODO, wie oben: definieren)
+    3. **Stakeholder**: Testzentrumsbetreiber, Verwaltung
+    4. **Beteiligte**: Testpersonen, Frontend
+    5. **Ablauf**:
+        1. Verwaltungspersonal benutzt Filter
+        2. Die Filter werden aktiviert und die sichtbare Auswahl an Elementen wird reduziert
+6. Als Anwender möchte ich die neuesten Nachrichten direkt auf meine Startseite geladen bekommen 
+    1. **UseCase-Nummer**: JS_BABOIS+A_6
+    2. **Beschreibung**: 
+        - Ausgangssituation: User lädt Startseite
+        - Ziel: Einfache Darstellung der Neuigkeiten
+        - Scope: Automatisches beziehen der Neuigkeiten aus dem Internet (Backend würde als Middleware funktionieren)
+    3. **Stakeholder**: Verwaltung
+    4. **Beteiligte**: Anwender, Backend
+    5. **Ablauf**:
+        1. User ruft Startseite auf
+        2. Daten werden automatisiert vom Backend abgerufen udn angezeigt
 
 **Das sind Erweiterungsmöglichkeiten (in Priorisierungsreihenfolge):**
 
@@ -83,16 +94,16 @@ Nicht priorisiert:
 
 **Software, die wir verwenden:**
 
-- git
-- Github
-- node 
-- npm
-- Frameworks
-  - react / NextJS
-  - Express
-  - node-json-db
-  - nodeMailer
-  - PDF-creator-Node
+-   git
+-   Github
+-   node
+-   npm
+-   Frameworks
+    -   react / NextJS
+    -   Express
+    -   node-json-db
+    -   nodeMailer
+    -   PDF-creator-Node
 
 **Farbschema**
 
@@ -103,10 +114,7 @@ https://coolors.co/e8e9f3-f05365-fabc2a-253d5b
 ```html
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;0,700;1,400&display=swap"
-  rel="stylesheet"
-/>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 ```
 
 **Unser Seign wurde erstellt in:**
