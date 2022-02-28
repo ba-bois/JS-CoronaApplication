@@ -4,7 +4,9 @@ import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig.js";
 import "dotenv/config";
 import * as jose from "jose";
-import hkdf from "@panva/hkdf";
+
+import checkIfFieldsFilled from "./validation.js";
+import decode from "./encryption.js";
 
 const app = express();
 const port = 3000;
@@ -12,31 +14,6 @@ const neuigkeiten = new JsonDB(new Config("filesystem/neuigkeiten", true, true, 
 const anmeldungen = new JsonDB(new Config("filesystem/anmeldungen", true, true, "/"));
 
 app.use(bodyparser.json());
-
-const checkIfFieldsFilled = (obj) => {
-    const allElements = ["surname", "lastName", "phoneNumber", "mail", "postCode", "city", "street", "houseNumber", "birthdate"];
-
-    const isEveryElementFilled = Object.values(obj).every((el) => !!el);
-    const isEveryElementAvailable = allElements.every((el) => Object.keys(obj).includes(el));
-
-    return isEveryElementFilled && isEveryElementAvailable;
-};
-
-async function getDerivedEncryptionKey(secret) {
-    return await (0, hkdf.default)("sha256", secret, "", "NextAuth.js Generated Encryption Key", 32);
-}
-
-async function decode(params) {
-    const { token, secret } = params;
-    if (!token) {
-        return null;
-    }
-    const encryptionSecret = await getDerivedEncryptionKey(secret);
-    const { payload } = await (0, jose.jwtDecrypt)(token, encryptionSecret, {
-        clockTolerance: 15,
-    });
-    return payload;
-}
 
 app.get("/anmeldung", async (req, res) => {
     const header = req.headers.authorization;
@@ -76,7 +53,7 @@ app.post("/anmeldung", (req, res) => {
     } catch (err) {
         console.error(err);
         if (err.message === "Invalid Object") {
-            res.sendStatus(400)
+            res.sendStatus(400);
         } else {
             res.sendStatus(500);
         }
