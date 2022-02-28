@@ -4,16 +4,18 @@ import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig.js";
 import "dotenv/config";
 import * as jose from "jose";
+import cors from "cors"
 
 import checkIfFieldsFilled from "./validation.js";
 import decode from "./encryption.js";
 
 const app = express();
-const port = 3000;
+const port = 3001;
 const neuigkeiten = new JsonDB(new Config("filesystem/neuigkeiten", true, true, "/"));
 const anmeldungen = new JsonDB(new Config("filesystem/anmeldungen", true, true, "/"));
 
 app.use(bodyparser.json());
+app.use(cors());
 
 app.get("/anmeldung", async (req, res) => {
     const header = req.headers.authorization;

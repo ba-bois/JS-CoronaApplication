@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
 import Title from "../Components/Title";
 import Button from "../Components/Button";
+import requestHandler from "../functions/RequestHandler"
 
 export default function Anmeldung() {
   const [errMsgObject, setErrMsgObject] = useState({});
@@ -203,7 +204,7 @@ export default function Anmeldung() {
           className="mt-4 w-[20%] text-4xl border-mango border-4 min-w-fit"
           onClick={() => {
             if (isFormValid) {
-              //TODO: Daten werden verschickt
+              new requestHandler().postAnmeldung(data)
             }
           }}
           disabled={!isFormValid}
