@@ -1,6 +1,7 @@
 import { getSession, signIn } from "next-auth/react";
 import Head from "next/head";
 import { BrandGithub } from "tabler-icons-react";
+import Title from "../../components/Title";
 
 export default function Login() {
   return (
@@ -11,10 +12,7 @@ export default function Login() {
       </Head>
       <div className="bg-ghostwhite w-screen h-screen pt-10">
         <div className="bg-white max-w-xl mx-auto rounded-xl flex flex-col items-center gap-6 py-8 shadow-md">
-          <div className="mb-8">
-            <h1 className="text-prussianblue text-2xl font-bold pb-1">Login</h1>
-            <hr className="border-mango border-t-4 w-2/3 mx-auto rounded-full" />
-          </div>
+          <Title>Login</Title>
 
           <input
             className="rounded-box bg-ghostwhite"

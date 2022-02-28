@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Header from "../components/Header";
 import Textbox from "../components/Textbox";
+import Link from "next/link";
 
 export default function Home() {
   const [textboxes, setTextboxes] = useState([
@@ -63,19 +64,22 @@ export default function Home() {
       <main className="min-h-screen">
         <Header>Corona Testzentrum</Header>
         {textboxes.map((el, i) => (
-          <Textbox key={`${el.title}_${i}`} title={el.title} content={el.content} />
+          <Textbox
+            key={`${el.title}_${i}`}
+            title={el.title}
+            content={el.content}
+          />
         ))}
       </main>
 
       <footer>
         <div className="w-full h-36 bg-white rounded-t-[50px] px-11 flex flex-col justify-around align-middle">
-          {/* //TODO: Replace irrelevant link with link to verwaltungsseite - login  */}
-          <a href="https://www.agar.io/#ffa">
-            <div className="flex flex-col items-center justify-center">
-              <b>Link zur Verwaltungsseite</b> <br />
+          <Link href="/verwaltung/login">
+            <a className="flex flex-col items-center justify-center">
+              <b>Link zur Verwaltungsseite</b>
               (Nur für Sie, Herr Strauß!)
-            </div>
-          </a>
+            </a>
+          </Link>
 
           <div className=" flex items-center justify-evenly">
             <b className="text-lg">Made by:</b>
