@@ -1,22 +1,15 @@
-import { getSession, signOut, useSession } from "next-auth/react";
-import Router from "next/router";
-import { useEffect } from "react";
+import { getSession } from "next-auth/react";
+import Head from "next/head";
+import VerwaltungsTemplate from "../../components/VerwaltungsTemplate";
 
 export default function VerwaltungIndex() {
-  const { data: session } = useSession();
-
   return (
     <>
-      Hallo {session.user.name}
-      <button
-        onClick={() =>
-          signOut({
-            callbackUrl: `${window.location.origin}/verwaltung/login`,
-          })
-        }
-      >
-        Sign out
-      </button>
+      <Head>
+        <title>Statistiken</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <VerwaltungsTemplate>Hier wären Statistiken.</VerwaltungsTemplate>
     </>
   );
 }
