@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+@layer components {
+  .rounded-box {
+    @apply rounded-full px-3 py-2 outline-none w-2/3;
+  }
+
+  .vw-input {
+    @apply bg-ghostwhite rounded-full px-3 py-1 outline-none w-1/3;
+  }
+}
