@@ -1,25 +1,93 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import Header from '../components/Header'
-import Textbox from '../components/Textbox'
+import { useState, useEffect } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import Header from "../components/Header";
+import Textbox from "../components/Textbox";
 
 export default function Home() {
+  const [textboxes, setTextboxes] = useState([
+    {
+      title: "Sebastian Kirner",
+      content:
+        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
+    },
+    {
+      title: "Sebastian Kirner",
+      content:
+        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
+    },
+    {
+      title: "Sebastian Kirner",
+      content:
+        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
+    },
+    {
+      title: "Sebastian Kirner",
+      content:
+        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
+    },
+    {
+      title: "Sebastian Kirner",
+      content:
+        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
+    },
+    {
+      title: "Sebastian Kirner",
+      content:
+        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
+    },
+    {
+      title: "Sebastian Kirner",
+      content:
+        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
+    },
+    {
+      title: "Sebastian Kirner",
+      content:
+        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
+    },
+  ]);
+
+  useEffect(() => {
+    //TODO: setTextboxes() with server Data
+  });
+
   return (
-    <div className='text-prussianblue'>
+    <div className="text-prussianblue bg-ghostwhite selection:bg-mango">
       <Head>
-        <title>Startseite Testzentrum</title>
+        <title>Startseite</title>
         <meta name="description" content="Generated by create next app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className='min-h-screen bg-ghostwhite '>
-      <Header test="hallo">Corona Testzentrum</Header>
-      <Textbox title="Überschrift 1" content="Inhalt 1"></Textbox>
+      <main className="min-h-screen">
+        <Header>Corona Testzentrum</Header>
+        {textboxes.map((el, i) => (
+          <Textbox key={`${el.title}_${i}`} title={el.title} content={el.content} />
+        ))}
       </main>
 
       <footer>
-        
+        <div className="w-full h-36 bg-white rounded-t-[50px] px-11 flex flex-col justify-around align-middle">
+          {/* //TODO: Replace irrelevant link with link to verwaltungsseite - login  */}
+          <a href="https://www.agar.io/#ffa">
+            <div className="flex flex-col items-center justify-center">
+              <b>Link zur Verwaltungsseite</b> <br />
+              (Nur für Sie, Herr Strauß!)
+            </div>
+          </a>
+
+          <div className=" flex items-center justify-evenly">
+            <b className="text-lg">Made by:</b>
+            <a href="https://github.com/gwentplayer2">Alexander Lehmpfuhl</a>
+            <a href="https://github.com/Arne26">Arne Bonn</a>
+            <a href="https://github.com/Ceddini">Cedric Schmitt</a>
+            <a href="https://github.com/MarvinGoinar">Marvin Goinar</a>
+            <a href="https://github.com/TobiasHeise">Tobias Heise</a>
+            <a href="https://github.com/J-S-Bach">Sebastian Kirner</a>
+          </div>
+        </div>
       </footer>
     </div>
-  )
+  );
 }
