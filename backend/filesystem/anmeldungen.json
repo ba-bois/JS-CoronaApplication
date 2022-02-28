@@ -1,26 +1,15 @@
 {
     "anmeldungen": [
         {
-            "surname": "null",
-            "lastName": "null",
-            "phoneNumber": "null",
-            "mail": "null",
-            "postCode": "null",
-            "city": "null",
-            "street": "null",
-            "houseNumber": "null",
-            "birthdate": "null"
-        },
-        {
-            "surname": "Sebastian",
-            "lastName": "null",
-            "phoneNumber": "null",
-            "mail": "null",
-            "postCode": "null",
-            "city": "null",
-            "street": "null",
-            "houseNumber": "null",
-            "birthdate": "null"
+            "surname": "Sebasita",
+            "lastName": "asd",
+            "phoneNumber": "0132",
+            "mail": "asdad@asdd.de",
+            "postCode": "22222",
+            "city": "asdasd",
+            "street": "asdasd",
+            "houseNumber": "222",
+            "birthdate": "2022-02-06T00:00:00.000Z"
         }
     ]
 }
