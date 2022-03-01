@@ -16,6 +16,7 @@ const anmeldungen = new JsonDB(new Config("filesystem/anmeldungen", true, true, 
 
 app.use(bodyparser.json());
 app.use(cors());
+app.use(express.static("global"));
 
 app.get("/anmeldung", async (req, res) => {
     const header = req.headers.authorization;
