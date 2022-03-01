@@ -4,54 +4,14 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Textbox from "../components/Textbox";
 import Link from "next/link";
+import RequestHandler from "../functions/RequestHandler";
 
 export default function Home() {
-  const [textboxes, setTextboxes] = useState([
-    {
-      title: "Sebastian Kirner",
-      content:
-        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
-    },
-    {
-      title: "Sebastian Kirner",
-      content:
-        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
-    },
-    {
-      title: "Sebastian Kirner",
-      content:
-        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
-    },
-    {
-      title: "Sebastian Kirner",
-      content:
-        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
-    },
-    {
-      title: "Sebastian Kirner",
-      content:
-        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
-    },
-    {
-      title: "Sebastian Kirner",
-      content:
-        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
-    },
-    {
-      title: "Sebastian Kirner",
-      content:
-        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
-    },
-    {
-      title: "Sebastian Kirner",
-      content:
-        "Sint do enim commodo excepteur incididunt ad aute proident dolor mollit sunt duis elit. Laborum proident consequat irure tempor ipsum amet dolore deserunt ea minim consequat excepteur ex irure. Commodo pariatur cillum commodo elit eu minim in cupidatat ea minim nulla labore. Do consectetur cupidatat officia exercitation non duis veniam ipsum. Pariatur laborum do consequat fugiat minim excepteur amet ex in. Velit veniam pariatur cillum tempor nostrud.",
-    },
-  ]);
+  const [textboxes, setTextboxes] = useState([]);
 
   useEffect(() => {
-    //TODO: setTextboxes() with server Data
-  });
+    new RequestHandler().getNeuigkeiten().then((neuigkeiten) => { return neuigkeiten.json() }).then((neuigkeiten) => {setTextboxes(neuigkeiten)})
+  }, []);
 
   return (
     <div className="text-prussianblue bg-ghostwhite selection:bg-mango">
@@ -63,11 +23,12 @@ export default function Home() {
 
       <main className="min-h-screen">
         <Header>Corona Testzentrum</Header>
-        {textboxes.map((el, i) => (
+        {textboxes.length > 0 && textboxes.map((el, i) => (
           <Textbox
             key={`${el.title}_${i}`}
             title={el.title}
             content={el.content}
+            picture={el.picture}
           />
         ))}
       </main>
