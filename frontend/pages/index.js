@@ -4,13 +4,15 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Textbox from "../components/Textbox";
 import Link from "next/link";
-import RequestHandler from "../functions/RequestHandler";
+import requestHandler from "../functions/RequestHandler";
 
 export default function Home() {
   const [textboxes, setTextboxes] = useState([]);
 
   useEffect(() => {
-    new RequestHandler().getNeuigkeiten().then((neuigkeiten) => { return neuigkeiten.json() }).then((neuigkeiten) => {setTextboxes(neuigkeiten)})
+    requestHandler.getNeuigkeiten().then((neuigkeiten) => {
+      setTextboxes(neuigkeiten);
+    });
   }, []);
 
   return (
@@ -23,14 +25,15 @@ export default function Home() {
 
       <main className="min-h-screen">
         <Header>Corona Testzentrum</Header>
-        {textboxes.length > 0 && textboxes.map((el, i) => (
-          <Textbox
-            key={`${el.title}_${i}`}
-            title={el.title}
-            content={el.content}
-            picture={el.picture}
-          />
-        ))}
+        {textboxes.length > 0 &&
+          textboxes.map((el, i) => (
+            <Textbox
+              key={`${el.title}_${i}`}
+              title={el.title}
+              content={el.content}
+              picture={el.picture}
+            />
+          ))}
       </main>
 
       <footer>

@@ -206,7 +206,7 @@ export default function Anmeldung() {
           className="mt-4 w-[20%] text-4xl border-mango border-4 min-w-fit"
           onClick={() => {
             if (isFormValid) {
-              new requestHandler().postAnmeldung(data)
+              requestHandler.postAnmeldung(data)
             }
           }}
           disabled={!isFormValid}
