@@ -1,4 +1,4 @@
-const Button = (props) => {
+const CustomButton = (props) => {
   return (
     <button
       className={`px-5 py-2 rounded-full bg-ghostwhite ease-in duration-300 ${props.className} ${
@@ -13,4 +13,4 @@ const Button = (props) => {
     </button>
   );
 };
-export default Button;
+export default CustomButton;

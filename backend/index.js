@@ -63,7 +63,6 @@ app.post("/anmeldung", (req, res) => {
     }
 });
 
-//TODO: UseCase schreiben
 app.get("/neuigkeiten", (req, res) => {
     try {
         if (neuigkeiten.exists("/neuigkeiten")) {
