@@ -24,9 +24,11 @@ export default function Home() {
 
             <main className="min-h-screen">
                 <Header>Corona Testzentrum</Header>
-                {textboxes?.map((el, i) => (
-                    <Textbox key={`${el.title}_${i}`} title={el.title} content={el.content} picture={el.picture} />
-                ))}
+                <div className="w-1/2 mx-auto flex flex-col">
+                    {textboxes?.map((el, i) => (
+                        <Textbox key={`${el.title}_${i}`} title={el.title} content={el.content} picture={el.picture} />
+                    ))}
+                </div>
             </main>
 
             <footer>
