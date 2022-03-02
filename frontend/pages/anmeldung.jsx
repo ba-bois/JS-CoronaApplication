@@ -2,8 +2,8 @@ import Head from "next/head";
 import Inputfield from "../Components/Inputfield";
 import { useState, useEffect } from "react";
 import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
-import Title from "../Components/Title";
-import Button from "../Components/Button";
+import CustomTitle from "../components/CustomTitle";
+import Button from "../components/CustomButton";
 import requestHandler from "../functions/RequestHandler";
 
 export default function Anmeldung() {
@@ -54,7 +54,7 @@ export default function Anmeldung() {
                 {/* Main Bubble */}
                 <div className="h-[75vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-10 p-10 overflow-auto">
                     <div className="w-full flex justify-center">
-                        <Title>Anmeldung</Title>
+                        <CustomTitle>Anmeldung</CustomTitle>
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
                         <Inputfield

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
-import Title from "./Title";
-import Button from "./Button";
+import CustomTitle from "./CustomTitle";
+import CustomButton from "./CustomButton";
 import { Vaccine } from "tabler-icons-react";
 
 const Header = (props) => {
@@ -11,15 +11,15 @@ const Header = (props) => {
       <div className="h-24 w-24 rounded-full justify-center bg-ghostwhite flex items-center">
         <Vaccine size={46} color={"#253D5B"}/>
       </div>
-      <Title>{props.children}</Title>
-      <Button
+      <CustomTitle>{props.children}</CustomTitle>
+      <CustomButton
         className="text-2xl"
         onClick={() => {
           router.push("/anmeldung");
         }}
       >
         Anmelden
-      </Button>
+      </CustomButton>
     </div>
   );
 };

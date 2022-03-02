@@ -1,4 +1,4 @@
-const Title = (props) => {
+const CustomTitle = (props) => {
   return (
     <div className={`flex flex-col items-center w-fit`}>
       <div className="text-3xl mb-2">{props.children}</div>
@@ -6,4 +6,4 @@ const Title = (props) => {
     </div>
   );
 };
-export default Title;
+export default CustomTitle;
