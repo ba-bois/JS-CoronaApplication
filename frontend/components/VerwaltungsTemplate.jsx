@@ -2,18 +2,19 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Vaccine } from "tabler-icons-react";
+import { prussianblue } from "../constants/colors";
 
 const VerwaltungsTemplate = (props) => {
   const { data: session } = useSession();
   const router = useRouter();
 
   return (
-    <div className="bg-ghostwhite w-screen h-screen">
+    <>
       <div className="bg-white py-2">
-        <div className="text-prussianblue flex justify-between max-w-4xl mx-auto">
+        <div className="flex justify-between max-w-4xl mx-auto">
           <nav className="flex items-center gap-5">
             <span className="flex items-center gap-x-1">
-              <Vaccine size={46} color={"#253D5B"} />
+              <Vaccine size={46} color={prussianblue} />
               <h1 className="text-2xl font-bold">JS Corona</h1>
             </span>
             <Link href="/verwaltung">
@@ -56,7 +57,7 @@ const VerwaltungsTemplate = (props) => {
       <div className="bg-white p-5 mt-10 max-w-4xl mx-auto rounded-xl">
         {props.children}
       </div>
-    </div>
+    </>
   );
 };
 export default VerwaltungsTemplate;

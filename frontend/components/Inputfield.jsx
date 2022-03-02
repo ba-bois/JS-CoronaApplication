@@ -1,4 +1,5 @@
 import React from "react";
+import {prussianblue, fieryrose} from "../constants/colors"
 
 const UserLogin = (props) => {
   return (
@@ -31,7 +32,7 @@ const UserLogin = (props) => {
         >
           <div className="flex flex-col justify-center pr-5">
             {React.cloneElement(props.icon, {
-              color: !props.errorMsg ? "#253D5B" : "#F05365",
+              color: !props.errorMsg ? prussianblue : fieryrose,
             })}
           </div>
         </div>

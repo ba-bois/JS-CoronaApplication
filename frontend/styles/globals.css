@@ -16,3 +16,7 @@
         @apply selection:bg-mango text-prussianblue bg-ghostwhite;
     }
 }
+
+@value colors: (
+  prussianblue: #fff
+)

@@ -1,7 +1,7 @@
 import { getSession, signIn } from "next-auth/react";
 import Head from "next/head";
 import { BrandGithub } from "tabler-icons-react";
-import Title from "../../components/Title";
+import CustomTitle from "../../components/CustomTitle";
 
 export default function Login() {
   return (
@@ -12,7 +12,7 @@ export default function Login() {
       </Head>
       <div className="bg-ghostwhite w-screen h-screen pt-10">
         <div className="bg-white max-w-xl mx-auto rounded-xl flex flex-col items-center gap-6 py-8 shadow-md">
-          <Title>Login</Title>
+          <CustomTitle>Login</CustomTitle>
 
           <input
             className="rounded-box bg-ghostwhite"
