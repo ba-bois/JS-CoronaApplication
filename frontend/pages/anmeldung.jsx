@@ -1,10 +1,12 @@
 import Head from "next/head";
 import Inputfield from "../Components/Inputfield";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
 import CustomTitle from "../components/CustomTitle";
 import Button from "../components/CustomButton";
 import requestHandler from "../functions/RequestHandler";
+import { OverlayContext } from "./_app";
+import { useRouter } from "next/router";
 
 export default function Anmeldung() {
     const [errMsgObject, setErrMsgObject] = useState({});
@@ -21,6 +23,10 @@ export default function Anmeldung() {
     });
     const [isFormValid, setIsFormValid] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+
+    const setOverlay = useContext(OverlayContext);
+
+    const router = useRouter();
 
     useEffect(() => {
         setIsFormValid(!Object.values(data).includes(null) && !Object.values(errMsgObject).filter((el) => !!el).length > 0);
@@ -146,14 +152,19 @@ export default function Anmeldung() {
                     onClick={() => {
                         if (isFormValid) {
                             setIsLoading(true);
-                            requestHandler.postAnmeldung(data).finally(() => {
-                                setIsLoading(false);
-                            });
+                            requestHandler
+                                .postAnmeldung(data)
+                                .then(() => {
+                                    router.push("./");
+                                    setOverlay({ content: "Deine Anmeldung wurde erfrolgreich übermittelt." });
+                                })
+                                .finally(() => {
+                                    setIsLoading(false);
+                                });
                         }
                     }}
                     isLoading={isLoading}
-                    disabled={!isFormValid}
-                >
+                    disabled={!isFormValid}>
                     Buchen!
                 </Button>
             </main>
