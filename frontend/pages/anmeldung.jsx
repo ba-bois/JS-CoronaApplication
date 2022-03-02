@@ -26,7 +26,6 @@ export default function Anmeldung() {
     }, [errMsgObject, data]);
 
     const handleBlur = (regex, property, errMessage) => {
-        console.log("im here")
         return (e) => {
             if (!e.target.value.match(regex)) {
                 let tempObj = {...errMsgObject};
