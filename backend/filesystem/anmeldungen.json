@@ -10,6 +10,17 @@
             "street": "asdasd",
             "houseNumber": "222",
             "birthdate": "2022-02-06T00:00:00.000Z"
+        },
+        {
+            "surname": "Sebastian",
+            "lastName": "Kirner",
+            "phoneNumber": "012345",
+            "mail": "a.b@c.de",
+            "postCode": "12345",
+            "city": "asd",
+            "street": "asd",
+            "houseNumber": "22",
+            "birthdate": "2022-03-25T00:00:00.000Z"
         }
     ]
 }

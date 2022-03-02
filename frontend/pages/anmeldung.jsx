@@ -35,7 +35,9 @@ export default function Anmeldung() {
       <main className="min-h-screen bg-ghostwhite flex flex-col w-full items-center selection:bg-mango text-prussianblue">
         {/* Main Bubble */}
         <div className="h-[75vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-10 p-10 overflow-auto">
-          <Title>Anmeldung</Title>
+          <div className="flex justify-center w-full">
+            <Title>Anmeldung</Title>
+          </div>          
           <div className="flex flex-auto gap-8 flex-col md:flex-row">
             <Inputfield
               placeholder="Vorname"
@@ -204,7 +206,7 @@ export default function Anmeldung() {
           className="mt-4 w-[20%] text-4xl border-mango border-4 min-w-fit"
           onClick={() => {
             if (isFormValid) {
-              new requestHandler().postAnmeldung(data)
+              requestHandler.postAnmeldung(data)
             }
           }}
           disabled={!isFormValid}
