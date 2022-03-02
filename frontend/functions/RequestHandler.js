@@ -1,12 +1,12 @@
-export default class RequestHandler {
-    #url = "http://localhost:3001";
+class RequestHandler {
+    url = "http://localhost:3001";
 
     #genericGET = async (endpoint) => {
-        return await fetch(this.#url + endpoint);
+        return await fetch(this.url + endpoint);
     };
 
     #genericPOST = async (endpoint, data) => {
-        return await fetch(this.#url + endpoint, {
+        return await fetch(this.url + endpoint, {
             method: "POST",
             cache: "no-cache",
             headers: {
@@ -20,5 +20,6 @@ export default class RequestHandler {
 
     postAnmeldung = async (body) => await this.#genericPOST("/anmeldung", body);
 
-    getNeuigkeiten = async () => await this.#genericGET("/neuigkeiten");
+    getNeuigkeiten = async () => await (await this.#genericGET("/neuigkeiten")).json();
 }
+export default new RequestHandler();
