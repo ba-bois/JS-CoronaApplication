@@ -50,7 +50,7 @@ export default function Anmeldung() {
                 <meta name="description" content="Your Appointment for a corona test made here" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <main className="min-h-screen bg-ghostwhite flex flex-col w-full items-center selection:bg-mango text-prussianblue">
+            <main className="min-h-screen bg-ghostwhite flex flex-col w-full items-center">
                 {/* Main Bubble */}
                 <div className="h-[75vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-10 p-10 overflow-auto">
                     <div className="w-full flex justify-center">
