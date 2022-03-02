@@ -48,7 +48,7 @@ app.get("/anmeldung", async (req, res) => {
 app.post("/anmeldung", (req, res) => {
     try {
         if (checkIfFieldsFilled(req.body)) {
-            anmeldungen.push("/anmeldungen[]", req.body, true);
+            anmeldungen.push("/anmeldungen[]", {...req.body, dateRegistered: new Date()}, true);
         } else {
             throw new Error("Invalid Object");
         }
