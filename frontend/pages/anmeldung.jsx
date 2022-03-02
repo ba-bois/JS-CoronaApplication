@@ -20,6 +20,7 @@ export default function Anmeldung() {
         birthdate: null,
     });
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setIsFormValid(!Object.values(data).includes(null) && !Object.values(errMsgObject).filter((el) => !!el).length > 0);
@@ -28,17 +29,17 @@ export default function Anmeldung() {
     const handleBlur = (regex, property, errMessage) => {
         return (e) => {
             if (!e.target.value.match(regex)) {
-                let tempObj = {...errMsgObject};
+                let tempObj = { ...errMsgObject };
                 tempObj[property] = errMessage;
                 setErrMsgObject(tempObj);
             } else {
-                let tempObj = {...errMsgObject};
+                let tempObj = { ...errMsgObject };
                 tempObj[property] = null;
                 setErrMsgObject(tempObj);
 
-                let dataObj = {...errMsgObject};
+                let dataObj = { ...data };
                 dataObj[property] = e.target.value;
-                setData({ ...data, surname: e.target.value });
+                setData(dataObj);
             }
         };
     };
@@ -141,12 +142,16 @@ export default function Anmeldung() {
 
                 {/* Button After the Bubble */}
                 <Button
-                    className="mt-4 w-1/5 text-4xl border-mango border-4 min-w-fit"
+                    className="mt-4 w-1/5 text-4xl border-mango border-4 min-w-fit h-16 flex justify-center"
                     onClick={() => {
                         if (isFormValid) {
-                            new requestHandler().postAnmeldung(data);
+                            setIsLoading(true);
+                            requestHandler.postAnmeldung(data).finally(() => {
+                                setIsLoading(false);
+                            });
                         }
                     }}
+                    isLoading={isLoading}
                     disabled={!isFormValid}
                 >
                     Buchen!

@@ -1,3 +1,5 @@
+import RequestHandler from "../functions/RequestHandler";
+
 const CustomButton = (props) => {
   return (
     <button
@@ -9,7 +11,7 @@ const CustomButton = (props) => {
       }}
       disabled={props.disabled}
     >
-      {props.children}
+      {!props.isLoading ? props.children : <img className="object-contain h-full w-auto" src={`${RequestHandler.url}/loading-buffering.gif`}/>}
     </button>
   );
 };
