@@ -1,7 +1,7 @@
 import React from "react";
 import {prussianblue, fieryrose} from "../constants/colors"
 
-const UserLogin = (props) => {
+const CustomInputfield = (props) => {
   return (
     <div className="flex flex-auto relative">
       <div
@@ -46,4 +46,4 @@ const UserLogin = (props) => {
   );
 };
 
-export default UserLogin;
+export default CustomInputfield;
