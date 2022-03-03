@@ -1,3 +1,43 @@
 {
-    "anmeldungen": []
+    "anmeldungen": [
+        {
+            "surname": "Cedric",
+            "lastName": "Schmitt",
+            "phoneNumber": "012314",
+            "mail": "mail@cedric-schmitt.de",
+            "postCode": "63075",
+            "city": "Offenbach am Main",
+            "street": "Strackgasse",
+            "houseNumber": "20",
+            "birthdate": "2022-03-31T00:00:00.000Z",
+            "dateRegistered": "2022-03-03T14:42:24.300Z",
+            "testId": "bpu687ldwl0b3jyr2"
+        },
+        {
+            "surname": "CedricZwei",
+            "lastName": "SchmittZwei",
+            "phoneNumber": "012414",
+            "mail": "mail2@cedric-schmitt.de",
+            "postCode": "63076",
+            "city": "Offenback am Main",
+            "street": "Strackstraße",
+            "houseNumber": "21",
+            "birthdate": "2222-03-23T00:00:00.000Z",
+            "dateRegistered": "2022-03-03T14:43:48.928Z",
+            "testId": "bpu687ldwl0b3ls1s"
+        },
+        {
+            "surname": "M",
+            "lastName": "M",
+            "phoneNumber": "01234",
+            "mail": "mM@m.md",
+            "postCode": "01234",
+            "city": "test",
+            "street": "test",
+            "houseNumber": "20",
+            "birthdate": "2022-03-16T00:00:00.000Z",
+            "dateRegistered": "2022-03-03T15:01:48.337Z",
+            "testId": "bpu687ko8l0b48wxe"
+        }
+    ]
 }

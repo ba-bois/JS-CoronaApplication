@@ -10,37 +10,39 @@ import checkIfFieldsFilled from "./validation.js";
 
 const app = express();
 const port = 3001;
-const neuigkeiten = new JsonDB(new Config("filesystem/neuigkeiten", true, true, "/"));
-const anmeldungen = new JsonDB(new Config("filesystem/anmeldungen", true, true, "/"));
+const neuigkeiten = new JsonDB(
+    new Config("filesystem/neuigkeiten", true, true, "/")
+);
+const anmeldungen = new JsonDB(
+    new Config("filesystem/anmeldungen", true, true, "/")
+);
 
 app.use(bodyparser.json());
 app.use(cors());
 app.use(express.static("global"));
 
 app.get("/anmeldung", async (req, res) => {
-    const header = req.headers.authorization;
-
-    if (header) {
-        try {
-            // check if data contains field anmeldungen, otherwise send empty array
-            if (anmeldungen.exists("/anmeldungen")) {
-                res.json(anmeldungen.getData("/anmeldungen"));
-            } else {
-                res.json([]);
-            }
-        } catch (err) {
-            console.error(err);
-            res.sendStatus(500);
+    try {
+        // check if data contains field anmeldungen, otherwise send empty array
+        if (anmeldungen.exists("/anmeldungen")) {
+            res.json(anmeldungen.getData("/anmeldungen"));
+        } else {
+            res.json([]);
         }
-    } else {
-        res.sendStatus(403);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(500);
     }
 });
 
 app.post("/anmeldung", (req, res) => {
     try {
         if (checkIfFieldsFilled(req.body)) {
-            anmeldungen.push("/anmeldungen[]", { ...req.body, dateRegistered: new Date(), testId: uniquid() }, true);
+            anmeldungen.push(
+                "/anmeldungen[]",
+                { ...req.body, dateRegistered: new Date(), testId: uniquid() },
+                true
+            );
         } else {
             throw new Error("Invalid Object");
         }
