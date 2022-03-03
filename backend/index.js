@@ -3,12 +3,10 @@ import bodyparser from "body-parser";
 import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig.js";
 import "dotenv/config";
-import * as jose from "jose";
 import cors from "cors";
 import uniquid from "uniqid";
 
 import checkIfFieldsFilled from "./validation.js";
-import decode from "./encryption.js";
 
 const app = express();
 const port = 3000;
@@ -23,9 +21,7 @@ app.get("/anmeldung", async (req, res) => {
     const header = req.headers.authorization;
 
     if (header) {
-        const token = header.split(" ")[1];
         try {
-            const t = await decode({ token, secret: process.env.PRIVATE_KEY });
             // check if data contains field anmeldungen, otherwise send empty array
             if (anmeldungen.exists("/anmeldungen")) {
                 res.json(anmeldungen.getData("/anmeldungen"));
@@ -33,13 +29,8 @@ app.get("/anmeldung", async (req, res) => {
                 res.json([]);
             }
         } catch (err) {
-            if (err instanceof jose.errors.JWEDecryptionFailed) {
-                console.log("Wrong key");
-                res.sendStatus(403);
-            } else {
-                console.error(err);
-                res.sendStatus(500);
-            }
+            console.error(err);
+            res.sendStatus(500);
         }
     } else {
         res.sendStatus(403);
