@@ -164,6 +164,10 @@ export default function Anmeldung() {
                                         router.push("./");
                                         setOverlay({ content: "Deine Anmeldung wurde erfrolgreich übermittelt." });
                                     })
+                                    .catch(err => {
+                                        console.error(err);
+                                        setOverlay({content: `Fehler! Fehlernachricht: "${err}"`, error: true})
+                                    })
                                     .finally(() => {
                                         setIsLoading(false);
                                     });

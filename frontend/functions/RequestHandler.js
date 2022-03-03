@@ -1,12 +1,16 @@
 class RequestHandler {
     url = "http://localhost:3001";
 
-    #genericGET = async (endpoint) => {
-        return await fetch(this.url + endpoint);
+    #genericGET = async endpoint => {
+        const answer = await fetch(this.url + endpoint);
+        if (!answer.ok) {
+            return new Error(answer.statusText);
+        }
+        return answer;
     };
 
     #genericPOST = async (endpoint, data) => {
-        return await fetch(this.url + endpoint, {
+        const answer = await fetch(this.url + endpoint, {
             method: "POST",
             cache: "no-cache",
             headers: {
@@ -14,11 +18,15 @@ class RequestHandler {
             },
             body: JSON.stringify(data),
         });
+        if (!answer.ok) {
+            return new Error(answer.statusText);
+        }
+        return answer;
     };
 
-    getAnmeldungen = async () => await this.#genericGET("/anmeldung");
+    getAnmeldungen = async () => await (await this.#genericGET("/anmeldung")).json();
 
-    postAnmeldung = async (body) => await this.#genericPOST("/anmeldung", body);
+    postAnmeldung = async body => await this.#genericPOST("/anmeldung", body);
 
     getNeuigkeiten = async () => await (await this.#genericGET("/neuigkeiten")).json();
 }
