@@ -5,13 +5,13 @@ import { Config } from "node-json-db/dist/lib/JsonDBConfig.js";
 import "dotenv/config";
 import * as jose from "jose";
 import cors from "cors";
-import uniquid from "uniqid ";
+import uniquid from "uniqid";
 
 import checkIfFieldsFilled from "./validation.js";
 import decode from "./encryption.js";
 
 const app = express();
-const port = 3001;
+const port = 3000;
 const neuigkeiten = new JsonDB(new Config("filesystem/neuigkeiten", true, true, "/"));
 const anmeldungen = new JsonDB(new Config("filesystem/anmeldungen", true, true, "/"));
 
