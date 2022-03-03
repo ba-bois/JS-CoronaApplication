@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Header from "../components/Header";
-import Textbox from "../components/Textbox";
+import { Header, Textbox } from "../components";
 import Link from "next/link";
 import requestHandler from "../functions/RequestHandler";
 
@@ -10,7 +9,7 @@ export default function Home() {
     const [textboxes, setTextboxes] = useState([]);
 
     useEffect(() => {
-        requestHandler.getNeuigkeiten().then((neuigkeiten) => {
+        requestHandler.getNeuigkeiten().then(neuigkeiten => {
             setTextboxes(neuigkeiten);
         });
     }, []);

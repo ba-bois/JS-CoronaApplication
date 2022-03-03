@@ -1,12 +1,10 @@
 import Head from "next/head";
-import Inputfield from "../Components/Inputfield";
+import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
-import CustomTitle from "../components/CustomTitle";
-import Button from "../components/CustomButton";
+import { CustomTitle, CustomButton, CustomInputfield  } from "../components/";
 import requestHandler from "../functions/RequestHandler";
 import { OverlayContext } from "./_app";
-import { useRouter } from "next/router";
 
 export default function Anmeldung() {
     const [errMsgObject, setErrMsgObject] = useState({});
@@ -29,11 +27,11 @@ export default function Anmeldung() {
     const router = useRouter();
 
     useEffect(() => {
-        setIsFormValid(!Object.values(data).includes(null) && !Object.values(errMsgObject).filter((el) => !!el).length > 0);
+        setIsFormValid(!Object.values(data).includes(null) && !Object.values(errMsgObject).filter(el => !!el).length > 0);
     }, [errMsgObject, data]);
 
     const handleBlur = (regex, property, errMessage) => {
-        return (e) => {
+        return e => {
             if (!e.target.value.match(regex)) {
                 let tempObj = { ...errMsgObject };
                 tempObj[property] = errMessage;
@@ -58,19 +56,21 @@ export default function Anmeldung() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="min-h-screen flex flex-col w-full items-center">
+                {/* Header */}
+                {/* <Header></Header> */}
                 {/* Main Bubble */}
                 <div className="h-[75vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-10 p-10 overflow-auto">
                     <div className="w-full flex justify-center">
                         <CustomTitle>Anmeldung</CustomTitle>
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Vorname"
                             icon={<User size={32} />}
                             onBlur={handleBlur(/^([^0-9]+)$/, "surname", "Ungültiger Vorname.")}
                             errorMsg={errMsgObject.surname}
                         />
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Nachname"
                             icon={<User size={32} />}
                             onBlur={handleBlur(/^([^0-9]+)$/, "lastName", "Ungültiger Nachname.")}
@@ -78,7 +78,7 @@ export default function Anmeldung() {
                         />
                     </div>
                     <div className="flex flex-auto">
-                        <Inputfield
+                        <CustomInputfield
                             className="flex-auto"
                             placeholder="Handynummer"
                             icon={<DeviceMobile size={32} />}
@@ -87,7 +87,7 @@ export default function Anmeldung() {
                         />
                     </div>
                     <div className="flex flex-auto">
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="E-Mail-adresse"
                             className="flex-auto "
                             icon={<Mail size={32} />}
@@ -96,13 +96,13 @@ export default function Anmeldung() {
                         />
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Postleitzahl"
                             icon={<ListNumbers size={32} />}
                             onBlur={handleBlur(/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/, "postCode", "Ungültige Postleitzahl.")}
                             errorMsg={errMsgObject.postCode}
                         />
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Stadt"
                             icon={<BuildingSkyscraper size={32} />}
                             onBlur={handleBlur(/^([^0-9]+)$/, "city", "Ungültige Stadt.")}
@@ -110,25 +110,25 @@ export default function Anmeldung() {
                         />
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Straße"
                             icon={<Home size={32} />}
                             onBlur={handleBlur(/^([^0-9]+)$/, "street", "Ungültige Straße.")}
                             errorMsg={errMsgObject.street}
                         />
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Hausnummer"
                             icon={<Home2 size={32} />}
                             onBlur={handleBlur(/^(\d+)$/, "houseNumber", "Ungültige Hausnummer.")}
                             errorMsg={errMsgObject.houseNumber}
                         />
                     </div>
-                    <Inputfield
+                    <CustomInputfield
                         className="flex-auto"
                         placeholder="Geburtsdatum"
                         icon={<Gift size={32} />}
                         type="date"
-                        onBlur={(e) => {
+                        onBlur={e => {
                             if (!e.target.validity.valid || !e.target.value) {
                                 setErrMsgObject({
                                     ...errMsgObject,
@@ -147,7 +147,7 @@ export default function Anmeldung() {
                 <div className="w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-t-[40px] border-t-white z-10" />
 
                 {/* Button After the Bubble */}
-                <Button
+                <CustomButton
                     className="mt-4 w-1/5 text-4xl border-mango border-4 min-w-fit h-16 flex justify-center"
                     onClick={() => {
                         if (isFormValid) {
@@ -166,7 +166,7 @@ export default function Anmeldung() {
                     isLoading={isLoading}
                     disabled={!isFormValid}>
                     Buchen!
-                </Button>
+                </CustomButton>
             </main>
         </div>
     );

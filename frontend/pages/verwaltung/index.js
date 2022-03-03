@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import Head from "next/head";
-import VerwaltungsTemplate from "../../components/VerwaltungsTemplate";
+import {Template} from "../../components";
 
 export default function VerwaltungIndex() {
   return (
@@ -9,7 +9,7 @@ export default function VerwaltungIndex() {
         <title>Statistiken</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <VerwaltungsTemplate>Hier wären Statistiken.</VerwaltungsTemplate>
+      <Template>Hier wären Statistiken.</Template>
     </>
   );
 }
