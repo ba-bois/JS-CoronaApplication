@@ -166,7 +166,7 @@ export default function Anmeldung() {
                                     })
                                     .catch(err => {
                                         console.error(err);
-                                        setOverlay({content: `Fehler! Fehlernachricht: "${err}"`})
+                                        setOverlay({content: `Fehler! Fehlernachricht: "${err}"`, error: true})
                                     })
                                     .finally(() => {
                                         setIsLoading(false);

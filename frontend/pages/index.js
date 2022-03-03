@@ -1,17 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Header, Textbox } from "../components";
 import Link from "next/link";
 import requestHandler from "../functions/RequestHandler";
+import { OverlayContext } from "./_app";
 
 export default function Home() {
     const [textboxes, setTextboxes] = useState([]);
-
+    const setOverlay = useContext(OverlayContext);
     useEffect(() => {
-        requestHandler.getNeuigkeiten().then(neuigkeiten => {
-            setTextboxes(neuigkeiten);
-        });
+        requestHandler
+            .getNeuigkeiten()
+            .then(neuigkeiten => {
+                setTextboxes(neuigkeiten);
+            })
+            .catch(err => {
+                console.error(err);
+                setOverlay({ content: `Fehler! Fehlernachricht: "${err}"`, error: true });
+            });
     }, []);
 
     return (
