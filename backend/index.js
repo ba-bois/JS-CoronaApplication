@@ -4,7 +4,8 @@ import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig.js";
 import "dotenv/config";
 import * as jose from "jose";
-import cors from "cors"
+import cors from "cors";
+import uniquid from "uniqid ";
 
 import checkIfFieldsFilled from "./validation.js";
 import decode from "./encryption.js";
@@ -48,7 +49,7 @@ app.get("/anmeldung", async (req, res) => {
 app.post("/anmeldung", (req, res) => {
     try {
         if (checkIfFieldsFilled(req.body)) {
-            anmeldungen.push("/anmeldungen[]", req.body, true);
+            anmeldungen.push("/anmeldungen[]", { ...req.body, dateRegistered: new Date(), testId: uniquid() }, true);
         } else {
             throw new Error("Invalid Object");
         }
