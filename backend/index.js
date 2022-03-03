@@ -9,7 +9,7 @@ import uniquid from "uniqid";
 import checkIfFieldsFilled from "./validation.js";
 
 const app = express();
-const port = 3000;
+const port = 3001;
 const neuigkeiten = new JsonDB(new Config("filesystem/neuigkeiten", true, true, "/"));
 const anmeldungen = new JsonDB(new Config("filesystem/anmeldungen", true, true, "/"));
 
