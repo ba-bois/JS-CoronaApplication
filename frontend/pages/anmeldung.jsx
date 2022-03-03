@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
-import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
+import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers, ArrowBack } from "tabler-icons-react";
 import { CustomTitle, CustomButton, CustomInputfield } from "../components/";
 import requestHandler from "../functions/RequestHandler";
 import { OverlayContext } from "./_app";
@@ -145,26 +145,35 @@ export default function Anmeldung() {
                 <div className="w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-t-[40px] border-t-white z-10" />
 
                 {/* Button After the Bubble */}
-                <CustomButton
-                    className="mt-4 w-1/5 text-4xl border-mango border-4 min-w-fit h-16 flex justify-center"
-                    onClick={() => {
-                        if (isFormValid) {
-                            setIsLoading(true);
-                            requestHandler
-                                .postAnmeldung(data)
-                                .then(() => {
-                                    router.push("./");
-                                    setOverlay({ content: "Deine Anmeldung wurde erfrolgreich übermittelt." });
-                                })
-                                .finally(() => {
-                                    setIsLoading(false);
-                                });
-                        }
-                    }}
-                    isLoading={isLoading}
-                    disabled={!isFormValid}>
-                    Buchen!
-                </CustomButton>
+                <div className="flex w-1/4">
+                    <CustomButton
+                        className="mt-4 text-4xl border-mango border-4 min-w-fit h-16 flex justify-center items-center mr-4"
+                        onClick={() => {
+                            router.push("./");
+                        }}>
+                        <ArrowBack size={32} />
+                    </CustomButton>
+                    <CustomButton
+                        className="mt-4 w-full text-4xl border-mango border-4 min-w-fit h-16 flex justify-center"
+                        onClick={() => {
+                            if (isFormValid) {
+                                setIsLoading(true);
+                                requestHandler
+                                    .postAnmeldung(data)
+                                    .then(() => {
+                                        router.push("./");
+                                        setOverlay({ content: "Deine Anmeldung wurde erfrolgreich übermittelt." });
+                                    })
+                                    .finally(() => {
+                                        setIsLoading(false);
+                                    });
+                            }
+                        }}
+                        isLoading={isLoading}
+                        disabled={!isFormValid}>
+                        Buchen!
+                    </CustomButton>
+                </div>
             </main>
         </div>
     );
