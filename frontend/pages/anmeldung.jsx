@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
-import { CustomTitle, CustomButton, CustomInputfield  } from "../components/";
+import { CustomTitle, CustomButton, CustomInputfield } from "../components/";
 import requestHandler from "../functions/RequestHandler";
 import { OverlayContext } from "./_app";
 
@@ -56,8 +56,6 @@ export default function Anmeldung() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <main className="min-h-screen flex flex-col w-full items-center">
-                {/* Header */}
-                {/* <Header></Header> */}
                 {/* Main Bubble */}
                 <div className="h-[75vh] xl:w-2/5 md:w-4/5 w-full mt-7 bg-white border-20 rounded-3xl flex flex-col gap-10 p-10 overflow-auto">
                     <div className="w-full flex justify-center">
