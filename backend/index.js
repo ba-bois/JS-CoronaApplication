@@ -38,8 +38,8 @@ app.get("/anmeldung", async (req, res) => {
                 res.sendStatus(403);
             } else {
                 console.error(err);
+                res.sendStatus(500);
             }
-            res.sendStatus(500);
         }
     } else {
         res.sendStatus(403);
