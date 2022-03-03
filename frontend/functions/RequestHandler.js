@@ -24,10 +24,10 @@ class RequestHandler {
         return answer;
     };
 
-    getAnmeldungen = async () => await this.#genericGET("/anmeldung").json();
+    getAnmeldungen = async () => await (await this.#genericGET("/anmeldung")).json();
 
     postAnmeldung = async body => await this.#genericPOST("/anmeldung", body);
 
-    getNeuigkeiten = async () => await this.#genericGET("/neuigkeiten").json();
+    getNeuigkeiten = async () => await (await this.#genericGET("/neuigkeiten")).json();
 }
 export default new RequestHandler();
