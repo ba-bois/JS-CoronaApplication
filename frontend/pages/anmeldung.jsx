@@ -162,7 +162,7 @@ export default function Anmeldung() {
                                     .postAnmeldung(data)
                                     .then(() => {
                                         router.push("./");
-                                        setOverlay({ content: "Deine Anmeldung wurde erfrolgreich übermittelt." });
+                                        setOverlay({ content: "Deine Anmeldung wurde erfolgreich übermittelt." });
                                     })
                                     .catch(err => {
                                         console.error(err);
