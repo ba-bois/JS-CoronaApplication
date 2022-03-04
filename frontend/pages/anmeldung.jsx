@@ -1,10 +1,10 @@
 import Head from "next/head";
-import Inputfield from "../Components/Inputfield";
-import { useState, useEffect } from "react";
-import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers } from "tabler-icons-react";
-import CustomTitle from "../components/CustomTitle";
-import Button from "../components/CustomButton";
+import { useRouter } from "next/router";
+import { useState, useEffect, useContext } from "react";
+import { User, DeviceMobile, Mail, Home, Home2, BuildingSkyscraper, Gift, ListNumbers, ArrowBack } from "tabler-icons-react";
+import { CustomTitle, CustomButton, CustomInputfield } from "../components/";
 import requestHandler from "../functions/RequestHandler";
+import { OverlayContext } from "./_app";
 
 export default function Anmeldung() {
     const [errMsgObject, setErrMsgObject] = useState({});
@@ -20,25 +20,30 @@ export default function Anmeldung() {
         birthdate: null,
     });
     const [isFormValid, setIsFormValid] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const setOverlay = useContext(OverlayContext);
+
+    const router = useRouter();
 
     useEffect(() => {
-        setIsFormValid(!Object.values(data).includes(null) && !Object.values(errMsgObject).filter((el) => !!el).length > 0);
+        setIsFormValid(!Object.values(data).includes(null) && !Object.values(errMsgObject).filter(el => !!el).length > 0);
     }, [errMsgObject, data]);
 
     const handleBlur = (regex, property, errMessage) => {
-        return (e) => {
+        return e => {
             if (!e.target.value.match(regex)) {
-                let tempObj = {...errMsgObject};
+                let tempObj = { ...errMsgObject };
                 tempObj[property] = errMessage;
                 setErrMsgObject(tempObj);
             } else {
-                let tempObj = {...errMsgObject};
+                let tempObj = { ...errMsgObject };
                 tempObj[property] = null;
                 setErrMsgObject(tempObj);
 
-                let dataObj = {...errMsgObject};
+                let dataObj = { ...data };
                 dataObj[property] = e.target.value;
-                setData({ ...data, surname: e.target.value });
+                setData(dataObj);
             }
         };
     };
@@ -57,13 +62,13 @@ export default function Anmeldung() {
                         <CustomTitle>Anmeldung</CustomTitle>
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Vorname"
                             icon={<User size={32} />}
                             onBlur={handleBlur(/^([^0-9]+)$/, "surname", "Ungültiger Vorname.")}
                             errorMsg={errMsgObject.surname}
                         />
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Nachname"
                             icon={<User size={32} />}
                             onBlur={handleBlur(/^([^0-9]+)$/, "lastName", "Ungültiger Nachname.")}
@@ -71,7 +76,7 @@ export default function Anmeldung() {
                         />
                     </div>
                     <div className="flex flex-auto">
-                        <Inputfield
+                        <CustomInputfield
                             className="flex-auto"
                             placeholder="Handynummer"
                             icon={<DeviceMobile size={32} />}
@@ -80,7 +85,7 @@ export default function Anmeldung() {
                         />
                     </div>
                     <div className="flex flex-auto">
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="E-Mail-adresse"
                             className="flex-auto "
                             icon={<Mail size={32} />}
@@ -89,13 +94,13 @@ export default function Anmeldung() {
                         />
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Postleitzahl"
                             icon={<ListNumbers size={32} />}
                             onBlur={handleBlur(/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/, "postCode", "Ungültige Postleitzahl.")}
                             errorMsg={errMsgObject.postCode}
                         />
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Stadt"
                             icon={<BuildingSkyscraper size={32} />}
                             onBlur={handleBlur(/^([^0-9]+)$/, "city", "Ungültige Stadt.")}
@@ -103,25 +108,25 @@ export default function Anmeldung() {
                         />
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Straße"
                             icon={<Home size={32} />}
                             onBlur={handleBlur(/^([^0-9]+)$/, "street", "Ungültige Straße.")}
                             errorMsg={errMsgObject.street}
                         />
-                        <Inputfield
+                        <CustomInputfield
                             placeholder="Hausnummer"
                             icon={<Home2 size={32} />}
                             onBlur={handleBlur(/^(\d+)$/, "houseNumber", "Ungültige Hausnummer.")}
                             errorMsg={errMsgObject.houseNumber}
                         />
                     </div>
-                    <Inputfield
+                    <CustomInputfield
                         className="flex-auto"
                         placeholder="Geburtsdatum"
                         icon={<Gift size={32} />}
                         type="date"
-                        onBlur={(e) => {
+                        onBlur={e => {
                             if (!e.target.validity.valid || !e.target.value) {
                                 setErrMsgObject({
                                     ...errMsgObject,
@@ -140,17 +145,39 @@ export default function Anmeldung() {
                 <div className="w-0 h-0 border-l-[60px] border-l-transparent border-r-[60px] border-r-transparent border-t-[40px] border-t-white z-10" />
 
                 {/* Button After the Bubble */}
-                <Button
-                    className="mt-4 w-1/5 text-4xl border-mango border-4 min-w-fit"
-                    onClick={() => {
-                        if (isFormValid) {
-                            new requestHandler().postAnmeldung(data);
-                        }
-                    }}
-                    disabled={!isFormValid}
-                >
-                    Buchen!
-                </Button>
+                <div className="flex w-1/4">
+                    <CustomButton
+                        className="mt-4 text-4xl border-mango border-4 min-w-fit h-16 flex justify-center items-center mr-4"
+                        onClick={() => {
+                            router.push("./");
+                        }}>
+                        <ArrowBack size={32} />
+                    </CustomButton>
+                    <CustomButton
+                        className="mt-4 w-full text-4xl border-mango border-4 min-w-fit h-16 flex justify-center"
+                        onClick={() => {
+                            if (isFormValid) {
+                                setIsLoading(true);
+                                requestHandler
+                                    .postAnmeldung(data)
+                                    .then(() => {
+                                        router.push("./");
+                                        setOverlay({ content: "Deine Anmeldung wurde erfrolgreich übermittelt." });
+                                    })
+                                    .catch(err => {
+                                        console.error(err);
+                                        setOverlay({content: `Fehler! Fehlernachricht: "${err}"`, error: true})
+                                    })
+                                    .finally(() => {
+                                        setIsLoading(false);
+                                    });
+                            }
+                        }}
+                        isLoading={isLoading}
+                        disabled={!isFormValid}>
+                        Buchen!
+                    </CustomButton>
+                </div>
             </main>
         </div>
     );

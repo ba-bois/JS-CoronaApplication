@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import Template from "../../components/VerwaltungsTemplate";
+import { Template } from "../../components";
 import { Edit, Eye, Trash } from "tabler-icons-react";
 import Head from "next/head";
 import { prussianblue } from "../../constants/colors";
