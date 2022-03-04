@@ -20,7 +20,7 @@ const VerwaltungsTemplate = props => {
                         <Link href="/verwaltung">
                             <a
                                 className={
-                                    router.pathname == "/verwaltung"
+                                    router.pathname === "/verwaltung"
                                         ? "font-bold"
                                         : ""
                                 }
@@ -31,7 +31,7 @@ const VerwaltungsTemplate = props => {
                         <Link href="/verwaltung/anmeldungen">
                             <a
                                 className={
-                                    router.pathname == "/verwaltung/anmeldungen"
+                                    router.pathname === "/verwaltung/anmeldungen"
                                         ? "font-bold"
                                         : ""
                                 }
