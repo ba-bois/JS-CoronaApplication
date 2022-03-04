@@ -113,9 +113,15 @@ Nicht priorisiert:
 -   Frameworks
     -   react / NextJS
     -   Express
+-   packages
     -   node-json-db
-    -   nodeMailer
-    -   PDF-creator-Node
+    -   tabler-icons-react
+    -   cors
+    -   body-parser
+    -   dotenv
+    -   uniqid
+    -   (nodeMailer)
+    -   (PDF-creator-Node)
 
 **Farbschema**
 
