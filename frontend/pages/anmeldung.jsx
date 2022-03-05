@@ -22,7 +22,7 @@ export default function Anmeldung() {
     const [isFormValid, setIsFormValid] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const setOverlay = useContext(OverlayContext);
+    const { setNotificationBar } = useContext(OverlayContext);
 
     const router = useRouter();
 
@@ -150,7 +150,8 @@ export default function Anmeldung() {
                         className="mt-4 text-4xl border-mango border-4 min-w-fit h-16 flex justify-center items-center mr-4"
                         onClick={() => {
                             router.push("./");
-                        }}>
+                        }}
+                    >
                         <ArrowBack size={32} />
                     </CustomButton>
                     <CustomButton
@@ -162,11 +163,11 @@ export default function Anmeldung() {
                                     .postAnmeldung(data)
                                     .then(() => {
                                         router.push("./");
-                                        setOverlay({ content: "Deine Anmeldung wurde erfrolgreich übermittelt." });
+                                        setNotificationBar({ content: "Deine Anmeldung wurde erfrolgreich übermittelt." });
                                     })
                                     .catch(err => {
                                         console.error(err);
-                                        setOverlay({content: `Fehler! Fehlernachricht: "${err}"`, error: true})
+                                        setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"`, error: true });
                                     })
                                     .finally(() => {
                                         setIsLoading(false);
@@ -174,7 +175,8 @@ export default function Anmeldung() {
                             }
                         }}
                         isLoading={isLoading}
-                        disabled={!isFormValid}>
+                        disabled={!isFormValid}
+                    >
                         Buchen!
                     </CustomButton>
                 </div>
