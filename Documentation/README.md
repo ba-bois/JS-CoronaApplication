@@ -68,9 +68,9 @@ Im Rahmen unseres Projektes möchten wir eine Onlineanmeldung für ein fiktives 
     5. **Ablauf**:
         1. Verwaltungspersonal benutzt Filter
         2. Die Filter werden aktiviert und die sichtbare Auswahl an Elementen wird reduziert
-6. Als Anwender möchte ich die neuesten Nachrichten direkt auf meine Startseite geladen bekommen 
+6. Als Anwender möchte ich die neuesten Nachrichten direkt auf meine Startseite geladen bekommen
     1. **UseCase-Nummer**: JS_BABOIS+A_6
-    2. **Beschreibung**: 
+    2. **Beschreibung**:
         - Ausgangssituation: User lädt Startseite
         - Ziel: Einfache Darstellung der Neuigkeiten
         - Scope: Automatisches beziehen der Neuigkeiten aus dem Internet (Backend würde als Middleware funktionieren)
@@ -82,10 +82,21 @@ Im Rahmen unseres Projektes möchten wir eine Onlineanmeldung für ein fiktives 
 
 **Das sind Erweiterungsmöglichkeiten (in Priorisierungsreihenfolge):**
 
-5. Als Verwaltung möchte ich Testergebnisse eintragen können.
-6. Als Anwender möchte ich, dass mein Testergebnis zu einem Dokument verarbeitet wird.
-7. Als Anwender möchte ich mein verarbeitetes Testergebnis per Email zugeschickt bekommen.
-8. Als Anwender möchte ich eine Anmeldebestätigung per Email zugeschickt bekommen, damit ich weiß ob mein Termin ordnungsgemäß eingetragen wurde.
+7. Als Verwaltung möchte ich Neuigkeiten eintragen können
+    1. **UseCase-Nummer**: JS_BABOIS+A_7
+    2. **Beschreibung**:
+        - Ausgangssituation: Verwaltung möchte eine Neuigkeit auf der Startseite eintragen 
+        - Ziel: Einfache Übersicht zum Eintragen der Neuigkeiten
+        - Scope: Kein Bearbeiten von alten Neuigkeiten, Löschen der Neuigkeiten wird eingebaut
+    3. **Stakeholder**: Besitzer
+    4. **Beteiligte**: Backend, Verwaltung, Kunden
+    5. **Ablauf**: 
+        1. Verwaltung ruft Reiter zum Bearbeiten der Neuigkeiten auf
+        2. Kann Anmeldungen hinzufügen oder löschen
+8. Als Verwaltung möchte ich Testergebnisse eintragen können.
+9. Als Anwender möchte ich, dass mein Testergebnis zu einem Dokument verarbeitet wird.
+10. Als Anwender möchte ich mein verarbeitetes Testergebnis per Email zugeschickt bekommen.
+11. Als Anwender möchte ich eine Anmeldebestätigung per Email zugeschickt bekommen, damit ich weiß ob mein Termin ordnungsgemäß eingetragen wurde.
 
 Nicht priorisiert:
 
@@ -102,9 +113,15 @@ Nicht priorisiert:
 -   Frameworks
     -   react / NextJS
     -   Express
+-   packages
     -   node-json-db
-    -   nodeMailer
-    -   PDF-creator-Node
+    -   tabler-icons-react
+    -   cors
+    -   body-parser
+    -   dotenv
+    -   uniqid
+    -   (nodeMailer)
+    -   (PDF-creator-Node)
 
 **Farbschema**
 
@@ -121,7 +138,6 @@ https://coolors.co/e8e9f3-f05365-fabc2a-253d5b
 **Unser Seign wurde erstellt in:**
 
 Figma
-
 
 **Bekannte Bugs**
 
