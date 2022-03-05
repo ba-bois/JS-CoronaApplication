@@ -36,8 +36,7 @@ export default function NeueNeuigkeiten(props) {
                 value={data.content}
                 onInput={e => setData({ ...data, content: e.target.value })}
                 className="bg-ghostwhite w-full outline-none px-6 py-2 text-2xl rounded-2xl"
-                required
-            ></textarea>
+                required></textarea>
             <div className="bg-ghostwhite rounded-full w-fit">
                 <label htmlFor="file" className="flex gap-x-2 px-6 py-4 cursor-pointer">
                     <FileUpload /> {data.file?.name ? data.file.name : "Datei hochladen"}
@@ -67,7 +66,8 @@ export default function NeueNeuigkeiten(props) {
                             .updateNeuigkeiten(formData, props.news.newsId)
                             .then(() => {
                                 setNotificationBar({ content: "Neuigkeit erfolgreich aktualisiert." });
-                                // setModal(null);
+                                setModal(null);
+                                props.updateNewsHandler({ ...data, newsId: props.news.newsId }, props.news.newsId);
                             })
                             .catch(err => {
                                 setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"` });
@@ -76,17 +76,17 @@ export default function NeueNeuigkeiten(props) {
                     } else {
                         requestHandler
                             .postNeuigkeiten(formData)
-                            .then(() => {
+                            .then(newsId => {
                                 setNotificationBar({ content: "Neuigkeit erfolgreich veröffentlicht." });
                                 setModal(null);
+                                props.updateNewsHandler({ ...data, newsId });
                             })
                             .catch(err => {
                                 setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"` });
                                 console.error(err);
                             });
                     }
-                }}
-            >
+                }}>
                 Veröffentlichen
             </CustomButton>
         </div>

@@ -19,6 +19,18 @@ export default function VerwaltungAnmeldungsUebersicht() {
         });
     }, []);
 
+    const updateNewsHandler = (newNews, id = null) => {
+        if (id) {
+            const index = news.findIndex(n => n.newsId === id);
+            const temp = [ ...news ];
+            temp[index] = newNews;
+            setNews(temp);
+        } else {
+            setNews([...news, newNews]);
+        }
+    };
+
+
     return (
         <>
             <Head>
@@ -41,10 +53,9 @@ export default function VerwaltungAnmeldungsUebersicht() {
                         onClick={() => {
                             setModal({
                                 title: "Neuigkeit hinzufügen",
-                                content: <EditNews />,
+                                content: <EditNews updateNewsHandler={updateNewsHandler} />,
                             });
-                        }}
-                    >
+                        }}>
                         Hinzufügen
                     </CustomButton>
                 </div>
@@ -86,7 +97,7 @@ export default function VerwaltungAnmeldungsUebersicht() {
                                             onClick={() => {
                                                 setModal({
                                                     title: "Neuigkeit bearbeiten",
-                                                    content: <EditNews news={n} />,
+                                                    content: <EditNews news={n} updateNewsHandler = {updateNewsHandler} />,
                                                 });
                                             }}
                                         />

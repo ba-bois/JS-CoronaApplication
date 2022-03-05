@@ -40,6 +40,8 @@ app.patch("/neuigkeiten/:id", (req, res) => {
             const data = neuigkeiten.getData("/neuigkeiten");
             const index = data.findIndex(n => n.newsId === req.params.id);
 
+            delete req.body.picture
+
             if (req.files && Object.keys(req.files).length > 0) {
                 const ext = req.files.picture.mimetype.split("/")[1];
                 const filename = uniquid() + "." + ext;
@@ -52,8 +54,8 @@ app.patch("/neuigkeiten/:id", (req, res) => {
                 neuigkeiten.push(
                     `/neuigkeiten[${index}]`,
                     {
-                        ...data[index],
                         ...req.body,
+                        ...data[index],
                     },
                     false
                 );
@@ -67,9 +69,6 @@ app.patch("/neuigkeiten/:id", (req, res) => {
 });
 
 app.post("/neuigkeiten", (req, res) => {
-    console.log(req.files);
-    console.log(req.body);
-
     try {
         let data = {
             ...req.body,
@@ -86,7 +85,7 @@ app.post("/neuigkeiten", (req, res) => {
         }
 
         neuigkeiten.push("/neuigkeiten[]", data, true);
-        res.sendStatus(201);
+        res.status(201).json(data.newsId);
     } catch (err) {
         console.error(err);
         res.sendStatus(500);
