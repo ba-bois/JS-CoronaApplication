@@ -15,7 +15,9 @@ export default function NeueNeuigkeiten(props) {
     const { setModal, setNotificationBar } = useContext(OverlayContext);
 
     useEffect(() => {
-        if (props.news) setData({ ...data, title: props.news.title, content: props.news.content });
+        if (props.news) {
+            setData({ ...data, title: props.news.title, content: props.news.content });
+        }
     }, []);
 
     return (
@@ -25,7 +27,9 @@ export default function NeueNeuigkeiten(props) {
                 type="text"
                 name="title"
                 value={data.title}
-                onInput={e => setData({ ...data, title: e.target.value })}
+                onInput={e => {
+                    setData({ ...data, title: e.target.value });
+                }}
                 className="bg-ghostwhite w-2/3 outline-none px-6 py-2 text-2xl rounded-full"
                 required
             />
@@ -34,12 +38,16 @@ export default function NeueNeuigkeiten(props) {
                 name="content"
                 rows="10"
                 value={data.content}
-                onInput={e => setData({ ...data, content: e.target.value })}
+                onInput={e => {
+                    setData({ ...data, content: e.target.value });
+                }}
                 className="bg-ghostwhite w-full outline-none px-6 py-2 text-2xl rounded-2xl"
-                required></textarea>
+                required
+            />
             <div className="bg-ghostwhite rounded-full w-fit">
-                <label htmlFor="file" className="flex gap-x-2 px-6 py-4 cursor-pointer">
-                    <FileUpload /> {data.file?.name ? data.file.name : "Datei hochladen"}
+                <label htmlFor="file" className="flex gap-x-3 px-6 py-4 cursor-pointer items-center">
+                    <FileUpload /> <span className="flex-shrink overflow-hidden">{data.file?.name || "Datei hochladen"}</span>
+                    {data.file && <img className="rounded-xl h-16 w-16 object-cover " src={URL.createObjectURL(data.file)}></img>}
                 </label>
                 <input
                     type="file"

@@ -22,7 +22,6 @@ app.use(fileUpload());
 
 app.get("/anmeldung", (req, res) => {
     try {
-        // check if data contains field anmeldungen, otherwise send empty array
         if (anmeldungen.exists("/anmeldungen")) {
             res.json(anmeldungen.getData("/anmeldungen"));
         } else {
@@ -151,5 +150,5 @@ app.get("/neuigkeiten", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`started server on port ${port}`);
+    console.log(`Started server on port ${port}`);
 });

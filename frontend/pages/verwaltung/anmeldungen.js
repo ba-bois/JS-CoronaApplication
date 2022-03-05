@@ -64,7 +64,7 @@ export default function VerwaltungAnmeldungsUebersicht() {
                                     <td className="pt-2">{r.phoneNumber}</td>
                                     <td className="pt-2">{r.mail}</td>
                                     <td className="flex gap-1 justify-end pt-2">
-                                        <Trash size={24} strokeWidth={1} color={prussianblue} onClick={e => console.log("test")} />
+                                        <Trash size={24} strokeWidth={1} color={prussianblue} />
                                         <Edit size={24} strokeWidth={1} color={prussianblue} />
                                         <Eye size={24} strokeWidth={1} color={prussianblue} />
                                     </td>
