@@ -14,9 +14,10 @@
 
     body {
         @apply selection:bg-mango text-prussianblue bg-ghostwhite;
+        font-family: "Open Sans", sans-serif;
     }
 }
 
 @value colors: (
   prussianblue: #fff
-)
+);

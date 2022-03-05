@@ -36,7 +36,18 @@ const VerwaltungsTemplate = props => {
                                         : ""
                                 }
                             >
-                                Anmeldungsübersicht
+                                Anmeldungen
+                            </a>
+                        </Link>
+                        <Link href="/verwaltung/neuigkeiten">
+                            <a
+                                className={
+                                    router.pathname == "/verwaltung/neuigkeiten"
+                                        ? "font-bold"
+                                        : ""
+                                }
+                            >
+                                Neuigkeiten
                             </a>
                         </Link>
                     </nav>

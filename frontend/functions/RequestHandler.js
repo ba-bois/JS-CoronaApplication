@@ -1,22 +1,16 @@
 class RequestHandler {
     url = "http://localhost:3001";
 
-    #genericGET = async (endpoint) => {
-        const answer = await fetch(this.url + endpoint);
-        if (!answer.ok) {
-            return new Error(answer.statusText);
-        }
-        return answer;
-    };
-
-    #genericPOST = async (endpoint, data) => {
+    #genericFetch = async (endpoint, method = "GET", body = null, hasNoContent = false) => {
         const answer = await fetch(this.url + endpoint, {
-            method: "POST",
+            method,
             cache: "no-cache",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
+            ...(hasNoContent || {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }),
+            ...(body && { body }),
         });
         if (!answer.ok) {
             return new Error(answer.statusText);
@@ -24,12 +18,16 @@ class RequestHandler {
         return answer;
     };
 
-    getAnmeldungen = async () =>
-        await (await this.#genericGET("/anmeldung")).json();
+    getAnmeldungen = async () => await (await this.#genericFetch("/anmeldung")).json();
 
-    postAnmeldung = async (body) => await this.#genericPOST("/anmeldung", body);
+    postAnmeldung = async body => await this.#genericFetch("/anmeldung", "POST", JSON.stringify(body));
 
-    getNeuigkeiten = async () =>
-        await (await this.#genericGET("/neuigkeiten")).json();
+    postNeuigkeiten = async body => await (await this.#genericFetch("/neuigkeiten", "POST", body, true)).json();
+
+    updateNeuigkeiten = async (body, id) => await this.#genericFetch(`/neuigkeiten/${id}`, "PATCH", body, true);
+
+    getNeuigkeiten = async () => await (await this.#genericFetch("/neuigkeiten")).json();
+
+    deleteNeuigkeiten = async id => await this.#genericFetch(`/neuigkeiten/${id}`, "DELETE");
 }
 export default new RequestHandler();

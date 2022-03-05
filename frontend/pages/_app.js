@@ -1,19 +1,37 @@
 import React, { useState } from "react";
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
-import Overlay from "../components/Overlay";
+import { NotificationBar, Modal } from "../components";
+import Head from "next/head";
 
 export const OverlayContext = React.createContext();
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
-    const [overlayState, setOverlayState] = useState(null);
+    const [notificationBar, setNotificationBar] = useState(null);
+    const [modal, setModal] = useState(null);
 
     return (
-        <SessionProvider session={session}>
-            <OverlayContext.Provider value={(overlay) => setOverlayState(overlay)}>
-                {overlayState === null || <Overlay {...overlayState} />}
-                <Component {...pageProps} />
-            </OverlayContext.Provider>
-        </SessionProvider>
+        <>
+            <Head>
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+            </Head>
+            <SessionProvider session={session}>
+                <OverlayContext.Provider
+                    value={{
+                        setModal: m => {
+                            setModal(m);
+                        },
+                        setNotificationBar: nb => {
+                            setNotificationBar(nb);
+                        },
+                    }}
+                >
+                    {notificationBar === null || <NotificationBar {...notificationBar} />}
+                    {modal === null || <Modal {...modal} />}
+                    <Component {...pageProps} />
+                </OverlayContext.Provider>
+            </SessionProvider>
+        </>
     );
 }

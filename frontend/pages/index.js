@@ -8,7 +8,7 @@ import { OverlayContext } from "./_app";
 
 export default function Home() {
     const [textboxes, setTextboxes] = useState([]);
-    const setOverlay = useContext(OverlayContext);
+    const { setNotificationBar } = useContext(OverlayContext);
     useEffect(() => {
         requestHandler
             .getNeuigkeiten()
@@ -17,7 +17,7 @@ export default function Home() {
             })
             .catch(err => {
                 console.error(err);
-                setOverlay({ content: `Fehler! Fehlernachricht: "${err}"`, error: true });
+                setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"`, error: true });
             });
     }, []);
 

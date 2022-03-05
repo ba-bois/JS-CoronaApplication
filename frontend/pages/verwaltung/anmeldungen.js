@@ -4,8 +4,7 @@ import { Edit, Eye, Trash } from "tabler-icons-react";
 import Head from "next/head";
 import { prussianblue } from "../../constants/colors";
 import requestHandler from "../../functions/RequestHandler";
-import { useContext, useEffect, useState } from "react";
-import { OverlayContext } from "../_app";
+import { useEffect, useState } from "react";
 
 export default function VerwaltungAnmeldungsUebersicht() {
     const [registrations, setRegistrations] = useState([]);
@@ -13,21 +12,18 @@ export default function VerwaltungAnmeldungsUebersicht() {
 
     useEffect(() => {
         requestHandler.getAnmeldungen().then(registrations => {
-            console.log(registrations);
             setRegistrations(registrations);
         });
     }, []);
 
-    const setOverlay = useContext(OverlayContext);
-
     return (
         <>
             <Head>
-                <title>Anmeldungsübersicht</title>
+                <title>Anmeldungen</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Template>
-                <h1 className="text-2xl pb-4">Anmeldungsübersicht</h1>
+                <h1 className="text-2xl pb-4">Anmeldungen</h1>
                 <div className="flex justify-between">
                     <input
                         className="vw-input my-2"
@@ -37,16 +33,12 @@ export default function VerwaltungAnmeldungsUebersicht() {
                         onInput={e => setSearchString(e.target.value)}
                     />
                     <div className="flex">
-                        <button className="bg-ghostwhite rounded-l-full px-5">
-                            « Vorheriger Tag
-                        </button>
+                        <button className="bg-ghostwhite rounded-l-full px-5">« Vorheriger Tag</button>
                         <button className="bg-ghostwhite px-5 flex-col flex items-center">
                             <strong>Heute</strong>
                             <small>25.04.2022</small>
                         </button>
-                        <button className="bg-ghostwhite rounded-r-full px-5">
-                            nächster Tag »
-                        </button>
+                        <button className="bg-ghostwhite rounded-r-full px-5">nächster Tag »</button>
                     </div>
                 </div>
 
@@ -62,42 +54,19 @@ export default function VerwaltungAnmeldungsUebersicht() {
                     </thead>
                     <tbody className="border-mango border-t-4 w mx-auto rounded-full">
                         {registrations
-                            .filter(r =>
-                                Object.values(r).some(event =>
-                                    event
-                                        .toLowerCase()
-                                        .includes(searchString.toLowerCase())
-                                )
-                            )
+                            .filter(r => Object.values(r).some(event => event.toLowerCase().includes(searchString.toLowerCase())))
                             ?.map(r => (
                                 <tr key={r.testId}>
                                     <td className="pt-2">
                                         {r.surname} {r.lastName}
                                     </td>
-                                    <td className="pt-2">
-                                        {new Date(
-                                            r.birthdate
-                                        ).toLocaleDateString("de-DE")}
-                                    </td>
+                                    <td className="pt-2">{new Date(r.birthdate).toLocaleDateString("de-DE")}</td>
                                     <td className="pt-2">{r.phoneNumber}</td>
                                     <td className="pt-2">{r.mail}</td>
                                     <td className="flex gap-1 justify-end pt-2">
-                                        <Trash
-                                            size={24}
-                                            strokeWidth={1}
-                                            color={prussianblue}
-                                            onClick={e => console.log("test")}
-                                        />
-                                        <Edit
-                                            size={24}
-                                            strokeWidth={1}
-                                            color={prussianblue}
-                                        />
-                                        <Eye
-                                            size={24}
-                                            strokeWidth={1}
-                                            color={prussianblue}
-                                        />
+                                        <Trash size={24} strokeWidth={1} color={prussianblue} />
+                                        <Edit size={24} strokeWidth={1} color={prussianblue} />
+                                        <Eye size={24} strokeWidth={1} color={prussianblue} />
                                     </td>
                                 </tr>
                             ))}
