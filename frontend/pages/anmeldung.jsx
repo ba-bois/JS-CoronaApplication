@@ -86,10 +86,10 @@ export default function Anmeldung() {
                     </div>
                     <div className="flex flex-auto">
                         <CustomInputfield
-                            placeholder="E-Mail-adresse"
+                            placeholder="E-Mail-Adresse"
                             className="flex-auto "
                             icon={<Mail size={32} />}
-                            onBlur={handleBlur(/(.+)@(.+){1,}\.(.+){2,}/, "mail", "Ungültige E-Mail-adresse.")}
+                            onBlur={handleBlur(/(.+)@(.+){1,}\.(.+){2,}/, "mail", "Ungültige E-Mail-Adresse.")}
                             errorMsg={errMsgObject.mail}
                         />
                     </div>
