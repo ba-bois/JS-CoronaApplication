@@ -54,7 +54,11 @@ export default function VerwaltungAnmeldungsUebersicht() {
                     </thead>
                     <tbody className="border-mango border-t-4 w mx-auto rounded-full">
                         {registrations
-                            .filter(r => Object.values(r).some(event => event.toLowerCase().includes(searchString.toLowerCase())))
+                            .filter(r =>
+                                Object.values({ ...r, birthdate: new Date(r.birthdate).toLocaleDateString("de-DE") }).some(event =>
+                                    event.toLowerCase().includes(searchString.toLowerCase())
+                                )
+                            )
                             ?.map(r => (
                                 <tr key={r.testId}>
                                     <td className="pt-2">
