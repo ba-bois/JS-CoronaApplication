@@ -39,7 +39,7 @@ app.patch("/neuigkeiten/:id", (req, res) => {
             const data = neuigkeiten.getData("/neuigkeiten");
             const index = data.findIndex(n => n.newsId === req.params.id);
 
-            delete req.body.picture
+            delete req.body.picture;
 
             if (req.files && Object.keys(req.files).length > 0) {
                 const ext = req.files.picture.mimetype.split("/")[1];
@@ -50,14 +50,11 @@ app.patch("/neuigkeiten/:id", (req, res) => {
                 const news = { ...req.body, picture: filename, newsId: req.params.id };
                 neuigkeiten.push(`/neuigkeiten[${index}]`, news, false);
             } else {
-                neuigkeiten.push(
-                    `/neuigkeiten[${index}]`,
-                    {
-                        ...req.body,
-                        ...data[index],
-                    },
-                    false
-                );
+                const dataa = {
+                    ...data[index],
+                    ...req.body,
+                };
+                neuigkeiten.push(`/neuigkeiten[${index}]`, dataa, false);
             }
             res.sendStatus(200);
         }
