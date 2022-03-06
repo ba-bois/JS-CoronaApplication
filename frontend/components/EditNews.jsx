@@ -2,7 +2,6 @@ import { getSession } from "next-auth/react";
 import { useState, useEffect, useContext } from "react";
 import { CustomButton } from ".";
 import { FileUpload } from "tabler-icons-react";
-import { OverlayContext } from "../pages/_app";
 
 export default function NeueNeuigkeiten(props) {
     const [data, setData] = useState({
@@ -10,8 +9,6 @@ export default function NeueNeuigkeiten(props) {
         content: "",
         file: null,
     });
-
-    const { setModal, setNotificationBar } = useContext(OverlayContext);
 
     useEffect(() => {
         if (props.news) {
