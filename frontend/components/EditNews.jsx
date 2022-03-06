@@ -67,7 +67,7 @@ export default function NeueNeuigkeiten(props) {
 
                     formData.append("title", data.title);
                     formData.append("content", data.content);
-                    formData.append("picture", data.file);
+                    data.file && formData.append("picture", data.file);
 
                     if (props.news) {
                         requestHandler
