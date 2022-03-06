@@ -50,11 +50,14 @@ app.patch("/neuigkeiten/:id", (req, res) => {
                 const news = { ...req.body, picture: filename, newsId: req.params.id };
                 neuigkeiten.push(`/neuigkeiten[${index}]`, news, false);
             } else {
-                const dataa = {
-                    ...data[index],
-                    ...req.body,
-                };
-                neuigkeiten.push(`/neuigkeiten[${index}]`, dataa, false);
+                neuigkeiten.push(
+                    `/neuigkeiten[${index}]`,
+                    {
+                        ...data[index],
+                        ...req.body,
+                    },
+                    false
+                );
             }
             res.sendStatus(200);
         }
