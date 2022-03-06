@@ -4,15 +4,15 @@ import { prussianblue, fieryrose } from "../constants/colors";
 const CustomInputfield = props => {
     return (
         <div className="flex flex-auto relative">
-            <form   
-                autoComplete="off"
+            <div   
+                //autoComplete="off"
                 className={`rounded-full w-full h-auto min-h-5 bg-ghostwhite flex align-middle relative ${
                     !props.errorMsg ? "focus-within:ring-mango focus-within:ring-2" : "ring-fieryrose ring-4"
                 }  overflow-hidden  ${props.className}`}
             >
                 <input
                     // autoComplete = "off" ist notwendig, da (mögl. unter Anderem) bei Firefox 97.0.1 die Felder durch Autovervollständigung ausgefüllt werden, aber im React state immernoch initial bei null sind
-                    autoComplete="false"
+                    //autoComplete="false"
                     placeholder={props.placeholder}
                     className={`bg-ghostwhite w-full ml-4 outline-none overflow-hidden text-2xl z-10 invalid:text-fieryrose ${
                         !!props.errorMsg && "text-fieryrose placeholder:text-fieryrose"
@@ -32,7 +32,7 @@ const CustomInputfield = props => {
                         })}
                     </div>
                 </div>
-            </form>
+            </div>
             {props.errorMsg && (
                 <span className="absolute w-[100%] -bottom-[25px] text-sm whitespace-nowrap overflow-hidden text-fieryrose ml-3">
                     {props.errorMsg}
