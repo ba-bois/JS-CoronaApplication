@@ -5,13 +5,13 @@ import Head from "next/head";
 import { prussianblue } from "../../constants/colors";
 import requestHandler from "../../functions/RequestHandler";
 import { useEffect, useState, useContext } from "react";
-import { overlayContext } from "../_app";
+import { OverlayContext } from "../_app";
 
 export default function VerwaltungAnmeldungsUebersicht() {
     const [registrations, setRegistrations] = useState([]);
     const [searchString, setSearchString] = useState("");
 
-    const { setNotificationBar } = useContext(overlayContext);
+    const { setNotificationBar } = useContext(OverlayContext);
 
     useEffect(() => {
         requestHandler
@@ -20,7 +20,7 @@ export default function VerwaltungAnmeldungsUebersicht() {
                 setRegistrations(registrations);
             })
             .catch(err => {
-                setNotificationBar(`Fehler! Fehlernachricht: "${err}"`, error: true );
+                setNotificationBar({content: `Fehler! Fehlernachricht: "${err}"`, error: true });
             });
     }, []);
 
@@ -61,7 +61,7 @@ export default function VerwaltungAnmeldungsUebersicht() {
                         </tr>
                     </thead>
                     <tbody className="border-mango border-t-4 w mx-auto rounded-full">
-                        {reqistrations.length > 0 &&
+                        {registrations.length > 0 &&
                             registrations
                                 .filter(r =>
                                     Object.values({ ...r, birthdate: new Date(r.birthdate).toLocaleDateString("de-DE") }).some(event =>
