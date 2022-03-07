@@ -2,8 +2,6 @@ import { getSession } from "next-auth/react";
 import { useState, useEffect, useContext } from "react";
 import { CustomButton } from ".";
 import { FileUpload } from "tabler-icons-react";
-import requestHandler from "../functions/RequestHandler";
-import { OverlayContext } from "../pages/_app";
 
 export default function NeueNeuigkeiten(props) {
     const [data, setData] = useState({
@@ -11,8 +9,6 @@ export default function NeueNeuigkeiten(props) {
         content: "",
         file: null,
     });
-
-    const { setModal, setNotificationBar } = useContext(OverlayContext);
 
     useEffect(() => {
         if (props.news) {
@@ -67,33 +63,9 @@ export default function NeueNeuigkeiten(props) {
 
                     formData.append("title", data.title);
                     formData.append("content", data.content);
-                    formData.append("picture", data.file);
+                    data.file && formData.append("picture", data.file);
 
-                    if (props.news) {
-                        requestHandler
-                            .updateNeuigkeiten(formData, props.news.newsId)
-                            .then(() => {
-                                setNotificationBar({ content: "Neuigkeit erfolgreich aktualisiert." });
-                                setModal(null);
-                                props.updateNewsHandler({ ...data, newsId: props.news.newsId }, props.news.newsId);
-                            })
-                            .catch(err => {
-                                setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"` });
-                                console.error(err);
-                            });
-                    } else {
-                        requestHandler
-                            .postNeuigkeiten(formData)
-                            .then(newsId => {
-                                setNotificationBar({ content: "Neuigkeit erfolgreich veröffentlicht." });
-                                setModal(null);
-                                props.updateNewsHandler({ ...data, newsId });
-                            })
-                            .catch(err => {
-                                setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"` });
-                                console.error(err);
-                            });
-                    }
+                    props.onCustomSubmit(formData)
                 }}>
                 Veröffentlichen
             </CustomButton>

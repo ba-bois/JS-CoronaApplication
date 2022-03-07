@@ -4,16 +4,24 @@ import { Edit, Eye, Trash } from "tabler-icons-react";
 import Head from "next/head";
 import { prussianblue } from "../../constants/colors";
 import requestHandler from "../../functions/RequestHandler";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { overlayContext } from "../_app";
 
 export default function VerwaltungAnmeldungsUebersicht() {
     const [registrations, setRegistrations] = useState([]);
     const [searchString, setSearchString] = useState("");
 
+    const { setNotificationBar } = useContext(overlayContext);
+
     useEffect(() => {
-        requestHandler.getAnmeldungen().then(registrations => {
-            setRegistrations(registrations);
-        });
+        requestHandler
+            .getAnmeldungen()
+            .then(registrations => {
+                setRegistrations(registrations);
+            })
+            .catch(err => {
+                setNotificationBar(`Fehler! Fehlernachricht: "${err}"`, error: true );
+            });
     }, []);
 
     return (
@@ -53,23 +61,28 @@ export default function VerwaltungAnmeldungsUebersicht() {
                         </tr>
                     </thead>
                     <tbody className="border-mango border-t-4 w mx-auto rounded-full">
-                        {registrations
-                            .filter(r => Object.values(r).some(event => event.toLowerCase().includes(searchString.toLowerCase())))
-                            ?.map(r => (
-                                <tr key={r.testId}>
-                                    <td className="pt-2">
-                                        {r.surname} {r.lastName}
-                                    </td>
-                                    <td className="pt-2">{new Date(r.birthdate).toLocaleDateString("de-DE")}</td>
-                                    <td className="pt-2">{r.phoneNumber}</td>
-                                    <td className="pt-2">{r.mail}</td>
-                                    <td className="flex gap-1 justify-end pt-2">
-                                        <Trash size={24} strokeWidth={1} color={prussianblue} />
-                                        <Edit size={24} strokeWidth={1} color={prussianblue} />
-                                        <Eye size={24} strokeWidth={1} color={prussianblue} />
-                                    </td>
-                                </tr>
-                            ))}
+                        {reqistrations.length > 0 &&
+                            registrations
+                                .filter(r =>
+                                    Object.values({ ...r, birthdate: new Date(r.birthdate).toLocaleDateString("de-DE") }).some(event =>
+                                        event.toLowerCase().includes(searchString.toLowerCase())
+                                    )
+                                )
+                                ?.map(r => (
+                                    <tr key={r.testId}>
+                                        <td className="pt-2">
+                                            {r.surname} {r.lastName}
+                                        </td>
+                                        <td className="pt-2">{new Date(r.birthdate).toLocaleDateString("de-DE")}</td>
+                                        <td className="pt-2">{r.phoneNumber}</td>
+                                        <td className="pt-2">{r.mail}</td>
+                                        <td className="flex gap-1 justify-end pt-2">
+                                            <Trash size={24} strokeWidth={1} color={prussianblue} />
+                                            <Edit size={24} strokeWidth={1} color={prussianblue} />
+                                            <Eye size={24} strokeWidth={1} color={prussianblue} />
+                                        </td>
+                                    </tr>
+                                ))}
                     </tbody>
                 </table>
             </Template>

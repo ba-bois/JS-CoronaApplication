@@ -39,7 +39,7 @@ app.patch("/neuigkeiten/:id", (req, res) => {
             const data = neuigkeiten.getData("/neuigkeiten");
             const index = data.findIndex(n => n.newsId === req.params.id);
 
-            delete req.body.picture
+            delete req.body.picture;
 
             if (req.files && Object.keys(req.files).length > 0) {
                 const ext = req.files.picture.mimetype.split("/")[1];
@@ -53,8 +53,8 @@ app.patch("/neuigkeiten/:id", (req, res) => {
                 neuigkeiten.push(
                     `/neuigkeiten[${index}]`,
                     {
-                        ...req.body,
                         ...data[index],
+                        ...req.body,
                     },
                     false
                 );

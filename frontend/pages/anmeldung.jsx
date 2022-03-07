@@ -7,7 +7,17 @@ import requestHandler from "../functions/RequestHandler";
 import { OverlayContext } from "./_app";
 
 export default function Anmeldung() {
-    const [errMsgObject, setErrMsgObject] = useState({});
+    const [errMsgObject, setErrMsgObject] = useState({
+        surname: "Das Feld muss befüllt sein",
+        lastName: "Das Feld muss befüllt sein",
+        phoneNumber: "Das Feld muss befüllt sein",
+        mail: "Das Feld muss befüllt sein",
+        postCode: "Das Feld muss befüllt sein",
+        city: "Das Feld muss befüllt sein",
+        street: "Das Feld muss befüllt sein",
+        houseNumber: "Das Feld muss befüllt sein",
+        birthdate: "Das Feld muss befüllt sein",
+    });
     const [data, setData] = useState({
         surname: null,
         lastName: null,
@@ -21,6 +31,7 @@ export default function Anmeldung() {
     });
     const [isFormValid, setIsFormValid] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const { setNotificationBar } = useContext(OverlayContext);
 
@@ -65,14 +76,14 @@ export default function Anmeldung() {
                         <CustomInputfield
                             placeholder="Vorname"
                             icon={<User size={32} />}
-                            onBlur={handleBlur(/^([^0-9]+)$/, "surname", "Ungültiger Vorname.")}
-                            errorMsg={errMsgObject.surname}
+                            onChange={handleBlur(/^([^0-9]+)$/, "surname", "Ungültiger Vorname.")}
+                            errorMsg={visible && errMsgObject.surname}
                         />
                         <CustomInputfield
                             placeholder="Nachname"
                             icon={<User size={32} />}
-                            onBlur={handleBlur(/^([^0-9]+)$/, "lastName", "Ungültiger Nachname.")}
-                            errorMsg={errMsgObject.lastName}
+                            onChange={handleBlur(/^([^0-9]+)$/, "lastName", "Ungültiger Nachname.")}
+                            errorMsg={visible && errMsgObject.lastName}
                         />
                     </div>
                     <div className="flex flex-auto">
@@ -80,45 +91,45 @@ export default function Anmeldung() {
                             className="flex-auto"
                             placeholder="Handynummer"
                             icon={<DeviceMobile size={32} />}
-                            onBlur={handleBlur(/^(^\+49)|(^0[1-9][0-9]+)$/, "phoneNumber", "Ungültige Telefonnummer.")}
-                            errorMsg={errMsgObject.phoneNumber}
+                            onChange={handleBlur(/^(^\+49)|(^0[1-9][0-9]+)$/, "phoneNumber", "Ungültige Telefonnummer.")}
+                            errorMsg={visible && errMsgObject.phoneNumber}
                         />
                     </div>
                     <div className="flex flex-auto">
                         <CustomInputfield
-                            placeholder="E-Mail-adresse"
+                            placeholder="E-Mail-Adresse"
                             className="flex-auto "
                             icon={<Mail size={32} />}
-                            onBlur={handleBlur(/(.+)@(.+){1,}\.(.+){2,}/, "mail", "Ungültige E-Mail-adresse.")}
-                            errorMsg={errMsgObject.mail}
+                            onChange={handleBlur(/(.+)@(.+){1,}\.(.+){2,}/, "mail", "Ungültige E-Mail-Adresse.")}
+                            errorMsg={visible && errMsgObject.mail}
                         />
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
                         <CustomInputfield
                             placeholder="Postleitzahl"
                             icon={<ListNumbers size={32} />}
-                            onBlur={handleBlur(/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/, "postCode", "Ungültige Postleitzahl.")}
-                            errorMsg={errMsgObject.postCode}
+                            onChange={handleBlur(/^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$/, "postCode", "Ungültige Postleitzahl.")}
+                            errorMsg={visible && errMsgObject.postCode}
                         />
                         <CustomInputfield
                             placeholder="Stadt"
                             icon={<BuildingSkyscraper size={32} />}
-                            onBlur={handleBlur(/^([^0-9]+)$/, "city", "Ungültige Stadt.")}
-                            errorMsg={errMsgObject.city}
+                            onChange={handleBlur(/^([^0-9]+)$/, "city", "Ungültige Stadt.")}
+                            errorMsg={visible && errMsgObject.city}
                         />
                     </div>
                     <div className="flex flex-auto gap-8 flex-col md:flex-row">
                         <CustomInputfield
                             placeholder="Straße"
                             icon={<Home size={32} />}
-                            onBlur={handleBlur(/^([^0-9]+)$/, "street", "Ungültige Straße.")}
-                            errorMsg={errMsgObject.street}
+                            onChange={handleBlur(/^([^0-9]+)$/, "street", "Ungültige Straße.")}
+                            errorMsg={visible && errMsgObject.street}
                         />
                         <CustomInputfield
                             placeholder="Hausnummer"
                             icon={<Home2 size={32} />}
-                            onBlur={handleBlur(/^(\d+)$/, "houseNumber", "Ungültige Hausnummer.")}
-                            errorMsg={errMsgObject.houseNumber}
+                            onChange={handleBlur(/^(\d+)$/, "houseNumber", "Ungültige Hausnummer.")}
+                            errorMsg={visible && errMsgObject.houseNumber}
                         />
                     </div>
                     <CustomInputfield
@@ -126,7 +137,7 @@ export default function Anmeldung() {
                         placeholder="Geburtsdatum"
                         icon={<Gift size={32} />}
                         type="date"
-                        onBlur={e => {
+                        onChange={e => {
                             if (!e.target.validity.valid || !e.target.value) {
                                 setErrMsgObject({
                                     ...errMsgObject,
@@ -137,7 +148,7 @@ export default function Anmeldung() {
                                 setData({ ...data, birthdate: e.target.valueAsDate });
                             }
                         }}
-                        errorMsg={errMsgObject.birthdate}
+                        errorMsg={visible && errMsgObject.birthdate}
                     />
                 </div>
 
@@ -150,8 +161,7 @@ export default function Anmeldung() {
                         className="mt-4 text-4xl border-mango border-4 min-w-fit h-16 flex justify-center items-center mr-4"
                         onClick={() => {
                             router.push("./");
-                        }}
-                    >
+                        }}>
                         <ArrowBack size={32} />
                     </CustomButton>
                     <CustomButton
@@ -172,11 +182,12 @@ export default function Anmeldung() {
                                     .finally(() => {
                                         setIsLoading(false);
                                     });
+                            } else {
+                                setVisible(true);
                             }
                         }}
                         isLoading={isLoading}
-                        disabled={!isFormValid}
-                    >
+                        disabled={!isFormValid && visible}>
                         Buchen!
                     </CustomButton>
                 </div>

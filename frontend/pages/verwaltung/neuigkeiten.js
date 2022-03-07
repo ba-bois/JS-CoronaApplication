@@ -11,25 +11,19 @@ export default function VerwaltungAnmeldungsUebersicht() {
     const [news, setNews] = useState([]);
     const [searchString, setSearchString] = useState("");
 
-    const { setModal } = useContext(OverlayContext);
+    const { setModal, setNotificationBar } = useContext(OverlayContext);
 
     useEffect(() => {
-        requestHandler.getNeuigkeiten().then(n => {
-            setNews(n);
-        });
+        requestHandler
+            .getNeuigkeiten()
+            .then(n => {
+                setNews(n);
+            })
+            .catch(err => {
+                console.log("test");
+                setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"`, error: true });
+            });
     }, []);
-
-    const updateNewsHandler = (newNews, id = null) => {
-        if (id) {
-            const index = news.findIndex(n => n.newsId === id);
-            const temp = [ ...news ];
-            temp[index] = newNews;
-            setNews(temp);
-        } else {
-            setNews([...news, newNews]);
-        }
-    };
-
 
     return (
         <>
@@ -53,7 +47,33 @@ export default function VerwaltungAnmeldungsUebersicht() {
                         onClick={() => {
                             setModal({
                                 title: "Neuigkeit hinzufügen",
-                                content: <EditNews updateNewsHandler={updateNewsHandler} />,
+                                content: (
+                                    <EditNews
+                                        onCustomSubmit={formData => {
+                                            requestHandler
+                                                .postNeuigkeiten(formData)
+                                                .then(newsId => {
+                                                    setNotificationBar({ content: "Neuigkeit erfolgreich veröffentlicht." });
+                                                    setModal(null);
+                                                    setNews([
+                                                        ...news,
+                                                        {
+                                                            title: formData.get("title"),
+                                                            content: formData.get("content"),
+                                                            ...(formData.get("picture") && {
+                                                                picture: formData.get("picture").name,
+                                                            }),
+                                                            newsId,
+                                                        },
+                                                    ]);
+                                                })
+                                                .catch(err => {
+                                                    setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"` });
+                                                    console.error(err);
+                                                });
+                                        }}
+                                    />
+                                ),
                             });
                         }}>
                         Hinzufügen
@@ -69,41 +89,73 @@ export default function VerwaltungAnmeldungsUebersicht() {
                         </tr>
                     </thead>
                     <tbody className="border-mango border-t-4 w mx-auto rounded-full">
-                        {news
-                            ?.filter(n => Object.values(n).some(event => event.toLowerCase().includes(searchString.toLowerCase())))
-                            ?.map(n => (
-                                <tr key={n.newsId}>
-                                    <td className="pt-2">{n.title}</td>
-                                    <td className="pt-2">{n.content?.length > 100 ? n.content.slice(0, 100) + "..." : n.content}</td>
-                                    <td className="flex gap-1 justify-end pt-2">
-                                        <Trash
-                                            size={24}
-                                            strokeWidth={1}
-                                            color={prussianblue}
-                                            className={`hover:stroke-fieryrose cursor-pointer`}
-                                            onClick={() => {
-                                                if (confirm("Sicher das Sie das löschen möchten?")) {
-                                                    requestHandler
-                                                        .deleteNeuigkeiten(n.newsId)
-                                                        .then(setNews([...news.filter(nEl => nEl.newsId !== n.newsId)]));
-                                                }
-                                            }}
-                                        />
-                                        <Edit
-                                            size={24}
-                                            strokeWidth={1}
-                                            color={prussianblue}
-                                            className={`hover:stroke-mango cursor-pointer`}
-                                            onClick={() => {
-                                                setModal({
-                                                    title: "Neuigkeit bearbeiten",
-                                                    content: <EditNews news={n} updateNewsHandler = {updateNewsHandler} />,
-                                                });
-                                            }}
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
+                        {news.length > 0 &&
+                            news
+                                ?.filter(n => Object.values(n).some(event => event?.toLowerCase().includes(searchString.toLowerCase())))
+                                ?.map((n, i) => (
+                                    <tr key={n.newsId}>
+                                        <td className="pt-2">{n.title}</td>
+                                        <td className="pt-2">{n.content?.length > 100 ? n.content.slice(0, 100) + "..." : n.content}</td>
+                                        <td className="flex gap-1 justify-end pt-2">
+                                            <Trash
+                                                size={24}
+                                                strokeWidth={1}
+                                                color={prussianblue}
+                                                className={`hover:stroke-fieryrose cursor-pointer`}
+                                                onClick={() => {
+                                                    if (confirm("Sicher das Sie das löschen möchten?")) {
+                                                        requestHandler
+                                                            .deleteNeuigkeiten(n.newsId)
+                                                            .then(setNews([...news.filter(nEl => nEl.newsId !== n.newsId)]));
+                                                    }
+                                                }}
+                                            />
+                                            <Edit
+                                                size={24}
+                                                strokeWidth={1}
+                                                color={prussianblue}
+                                                className={`hover:stroke-mango cursor-pointer`}
+                                                onClick={() => {
+                                                    setModal({
+                                                        title: "Neuigkeit bearbeiten",
+                                                        content: (
+                                                            <EditNews
+                                                                news={n}
+                                                                onCustomSubmit={formData => {
+                                                                    requestHandler
+                                                                        .updateNeuigkeiten(formData, n.newsId)
+                                                                        .then(() => {
+                                                                            setNotificationBar({
+                                                                                content: "Neuigkeit erfolgreich aktualisiert.",
+                                                                            });
+                                                                            setModal(null);
+
+                                                                            const temp = [...news];
+                                                                            temp[i] = {
+                                                                                title: formData.get("title"),
+                                                                                content: formData.get("content"),
+                                                                                ...(formData.get("picture") && {
+                                                                                    picture: formData.get("picture").name,
+                                                                                }),
+                                                                                newsId: n.newsId,
+                                                                            };
+                                                                            setNews(temp);
+                                                                        })
+                                                                        .catch(err => {
+                                                                            setNotificationBar({
+                                                                                content: `Fehler! Fehlernachricht: "${err}"`,
+                                                                            });
+                                                                            console.error(err);
+                                                                        });
+                                                                }}
+                                                            />
+                                                        ),
+                                                    });
+                                                }}
+                                            />
+                                        </td>
+                                    </tr>
+                                ))}
                     </tbody>
                 </table>
             </Template>
