@@ -13,7 +13,7 @@ class RequestHandler {
             ...(body && { body }),
         });
         if (!answer.ok) {
-            return new Error(answer.statusText);
+            throw new Error(answer.statusText);
         }
         return answer;
     };
