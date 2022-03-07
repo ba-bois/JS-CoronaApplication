@@ -19,8 +19,8 @@ export default function VerwaltungAnmeldungsUebersicht() {
             .then(registrations => {
                 setRegistrations(registrations);
             })
-            .catch(() => {
-                setNotificationBar;
+            .catch(err => {
+                setNotificationBar(`Fehler! Fehlernachricht: "${err}"`);
             });
     }, []);
 
