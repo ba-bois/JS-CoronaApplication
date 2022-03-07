@@ -20,7 +20,7 @@ export default function VerwaltungAnmeldungsUebersicht() {
                 setRegistrations(registrations);
             })
             .catch(err => {
-                setNotificationBar(`Fehler! Fehlernachricht: "${err}"`);
+                setNotificationBar(`Fehler! Fehlernachricht: "${err}"`, error: true );
             });
     }, []);
 
