@@ -7,7 +7,7 @@ import requestHandler from "../../functions/RequestHandler";
 import { useEffect, useState, useContext } from "react";
 import { OverlayContext } from "../_app";
 
-export default function VerwaltungAnmeldungsUebersicht() {
+export default function VerwaltungAnmeldungen() {
     const [registrations, setRegistrations] = useState([]);
     const [searchString, setSearchString] = useState("");
 
@@ -20,7 +20,7 @@ export default function VerwaltungAnmeldungsUebersicht() {
                 setRegistrations(registrations);
             })
             .catch(err => {
-                setNotificationBar({content: `Fehler! Fehlernachricht: "${err}"`, error: true });
+                setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"`, error: true });
             });
     }, []);
 

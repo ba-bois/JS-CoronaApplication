@@ -3,7 +3,7 @@ import Head from "next/head";
 import { BrandGithub } from "tabler-icons-react";
 import { CustomTitle } from "../../components/";
 
-export default function Login() {
+export default function VerwaltungLogin() {
     return (
         <>
             <Head>
@@ -34,7 +34,8 @@ export default function Login() {
                                 callbackUrl: `${window.location.origin}/verwaltung`,
                             })
                         }
-                        role="link">
+                        role="link"
+                    >
                         <BrandGithub size={32} color={"#253D5B"} /> <span className="w-full text-center">GitHub Login</span>
                     </button>
                 </div>
