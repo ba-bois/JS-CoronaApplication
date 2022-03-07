@@ -21,7 +21,7 @@ export default function VerwaltungAnmeldungsUebersicht() {
             })
             .catch(err => {
                 console.log("test");
-                setNotificationBar({ content: `Fehler! Fehlermeldung: ${err}`, error: true });
+                setNotificationBar({ content: `Fehler! Fehlernachricht: "${err}"`, error: true });
             });
     }, []);
 
