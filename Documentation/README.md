@@ -1,6 +1,7 @@
 # JS-CoronaApplication
 
-This some serious gourmet code. Das seriöser Gourmetcode.
+This some serious gourmet code. 
+Das seriöser Gourmetcode.
 
 **Installationsanleitung**
 
@@ -60,7 +61,7 @@ https://coolors.co/e8e9f3-f05365-fabc2a-253d5b
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 ```
 
-**Unser Seign wurde erstellt in:**
+**Unser Design wurde erstellt in:**
 
 Figma
 
