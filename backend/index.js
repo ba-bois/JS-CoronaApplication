@@ -2,7 +2,6 @@ import express from "express";
 import bodyparser from "body-parser";
 import { JsonDB } from "node-json-db";
 import { Config } from "node-json-db/dist/lib/JsonDBConfig.js";
-import "dotenv/config";
 import cors from "cors";
 import uniquid from "uniqid";
 import fileUpload from "express-fileupload";
