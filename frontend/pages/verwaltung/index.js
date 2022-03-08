@@ -1,6 +1,6 @@
 import { getSession } from "next-auth/react";
 import Head from "next/head";
-import {Template} from "../../components";
+import { Template } from "../../components";
 
 export default function VerwaltungIndex() {
   return (
